@@ -1,1 +1,1386 @@
-<h1> data analis <h1>
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Data Analytics Portal & Sampling Simulator</title>
+    
+    <!-- Google Fonts - Nova Flat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Flat&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Nova Flat"', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        darkBg: '#05070f',
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Gaya Kustom Glassmorphism & Transisi */
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        .dark .glassmorphism {
+            background: rgba(10, 15, 30, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .glass-card {
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+        body {
+            font-family: 'Nova Flat', system-ui, -apple-system, sans-serif;
+            background-attachment: fixed;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-darkBg dark:text-slate-100 min-h-screen font-sans antialiased overflow-x-hidden">
+
+    <!-- Efek Dekorasi Latar Belakang Global -->
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/10 dark:bg-brand-900/15 blur-[120px] pointer-events-none z-[-1]"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/10 dark:bg-fuchsia-900/10 blur-[120px] pointer-events-none z-[-1]"></div>
+
+    <!-- NOTIFIKASI TOAST CUSTOM -->
+    <div id="toast-container" class="fixed top-24 right-4 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- ================= VIEW 1: PORTFOLIO LANDING PAGE ================= -->
+    <div id="view-landing-page" class="flex flex-col min-h-screen transition-all duration-500">
+        
+        <!-- HEADER / NAVIGATION (LANDING PAGE STYLE) -->
+        <header class="sticky top-0 z-40 w-full glassmorphism border-b transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 bg-gradient-to-tr from-brand-500 to-indigo-600 rounded-xl text-white shadow-lg shadow-brand-500/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-bold bg-gradient-to-r from-brand-600 to-indigo-500 dark:from-brand-500 dark:to-indigo-300 bg-clip-text text-transparent">
+                                PyAnalytics Studio
+                            </h1>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Enterprise Portfolio Platform</p>
+                        </div>
+                    </div>
+
+                    <!-- Menu Internal Navigation Landing Page -->
+                    <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600 dark:text-slate-300">
+                        <a href="#about-project" class="hover:text-brand-500 transition-colors">Tentang Proyek</a>
+                        <a href="#workflow" class="hover:text-brand-500 transition-colors">Metodologi</a>
+                        <a href="#executive-metrics" class="hover:text-brand-500 transition-colors">Ringkasan Eksekutif</a>
+                    </nav>
+
+                    <div class="flex items-center space-x-3">
+                        <!-- Theme Toggle -->
+                        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/50 dark:hover:bg-slate-800/80 border border-slate-300/30 dark:border-slate-700/30 transition-all text-slate-700 dark:text-slate-300" title="Ubah Tema">
+                            <svg id="sun-icon-landing" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+                            </svg>
+                            <svg id="moon-icon-landing" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </button>
+                        
+                        <!-- CTA Masuk Konsol -->
+                        <button onclick="enterAppConsole()" class="px-5 py-2 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-md shadow-brand-500/10 transition-all hover:scale-[1.02] text-sm">
+                            Konsol Utama &rarr;
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- LANDING PAGE HERO SECTION -->
+        <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+            
+            <section id="about-project" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-6">
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
+                        <span class="w-2 h-2 mr-2 bg-brand-500 rounded-full animate-ping"></span>
+                        Platform Portofolio &amp; Hasil Analisis Data
+                    </span>
+                    <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+                        Presentasi Hasil Analisis &amp; <span class="bg-gradient-to-r from-brand-500 to-indigo-500 bg-clip-text text-transparent text-glow">Simulasi Kurva Terintegrasi</span>
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Proyek ini dikembangkan menggunakan pemrosesan data tangguh backend Python untuk memvalidasi jutaan baris data mentah. Antarmuka ini dirancang secara transparan demi menyajikan data asli, memvisualisasikan kurva secara akurat, serta menawarkan dashboard interaktif yang premium dan modern.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="enterAppConsole()" class="px-8 py-4 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-brand-500/20 transition-all hover:scale-[1.03] text-base">
+                            Buka Konsol Aplikasi &amp; Eksplorasi Data
+                        </button>
+                        <a href="#workflow" class="px-8 py-4 bg-white/10 hover:bg-white/20 dark:bg-slate-800/40 dark:hover:bg-slate-800/70 text-slate-800 dark:text-slate-200 font-bold rounded-xl border border-slate-300/50 dark:border-slate-700/50 transition-all text-center flex items-center justify-center">
+                            Pelajari Metodologi
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative">
+                    <!-- Preview Card Visual sebagai Ilustrasi Platform -->
+                    <div class="glassmorphism glass-card rounded-3xl p-6 relative z-10 border-2 border-brand-500/20 shadow-2xl overflow-hidden group">
+                        <div class="absolute -right-16 -top-16 w-36 h-36 bg-brand-500/20 rounded-full blur-2xl"></div>
+                        <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-300/20 dark:border-slate-700/20">
+                            <span class="text-xs font-extrabold uppercase text-slate-400">Pratinjau Antarmuka Konsol</span>
+                            <span class="w-3 h-3 rounded-full bg-brand-500"></span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="h-32 bg-slate-900/30 rounded-2xl flex items-center justify-center p-2 border border-slate-300/10">
+                                <svg class="w-full h-24 text-brand-500/80 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 100 50">
+                                    <path d="M10,40 Q30,10 50,25 T90,10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+                                    <circle cx="50" cy="25" r="4" fill="currentColor"></circle>
+                                    <line x1="50" y1="25" x2="50" y2="45" stroke="currentColor" stroke-dasharray="2" stroke-width="1.5"></line>
+                                </svg>
+                            </div>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Total Populasi</span>
+                                    <span class="font-bold text-slate-700 dark:text-slate-200">1.000 Titik Data</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Aproksimasi Gaussian</span>
+                                    <span class="font-bold text-green-500">μ = 50.12 | σ = 10.05</span>
+                                </div>
+                            </div>
+                            <button onclick="enterAppConsole()" class="w-full py-2.5 bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 rounded-xl text-xs font-bold text-brand-600 dark:text-brand-400 transition-colors">
+                                Luncurkan Simulasi Interaktif &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- METODOLOGI & WORKFLOW -->
+            <section id="workflow" class="space-y-6 pt-6">
+                <div class="border-l-4 border-brand-500 pl-4">
+                    <h3 class="text-2xl font-bold">Metodologi &amp; Alur Kerja</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Siklus pengolahan data mentah dari backend Python ke visualisasi web</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-violet-500/10 dark:bg-violet-500/20 text-violet-600 dark:text-violet-400 flex items-center justify-center mb-4 font-bold text-xl">
+                            01
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Python Processing</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Pembersihan dataset dasar, kalkulasi nilai parameter agregat statistik utama ($Mean$, $Standard\ Deviation$, $Z\text{-}Score$), serta pembentukan estimasi titik kurva teoritis presisi tinggi.
+                        </p>
+                    </div>
+
+                    <div class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4 font-bold text-xl">
+                            02
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">REST API Serving</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Konversi data internal ke struktur format JSON terstandar untuk dikirim dari FastAPI backend ke frontend klien secara cepat dengan latensi jaringan minimal.
+                        </p>
+                    </div>
+
+                    <div class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 font-bold text-xl">
+                            03
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Interaktivitas Klien</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Merender visualisasi dengan Chart.js, menyediakan sistem paginasi tabel data asli yang responsif, serta mensimulasikan parameter distribusi secara dinamis.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXECUTIVE METRICS OVERVIEW -->
+            <section id="executive-metrics" class="space-y-6 pt-6">
+                <div class="border-l-4 border-brand-500 pl-4">
+                    <h3 class="text-2xl font-bold">Ringkasan Eksekutif Metrik Kunci</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Parameter utama hasil sampling populasi terhitung</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
+                        <div class="space-y-1">
+                            <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Total Populasi Data</span>
+                            <h4 class="text-2xl font-extrabold text-glow">1.000</h4>
+                            <p class="text-xs text-green-500 flex items-center">
+                                <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1"></span>
+                                100% Terklasterisasi
+                            </p>
+                        </div>
+                        <div class="p-3 bg-brand-500/10 text-brand-500 rounded-xl">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
+                        <div class="space-y-1">
+                            <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Rata-rata (μ / Mean)</span>
+                            <h4 class="text-2xl font-extrabold text-glow">50.12</h4>
+                            <p class="text-xs text-slate-400">Target Ideal: 50.00</p>
+                        </div>
+                        <div class="p-3 bg-indigo-500/10 text-indigo-500 rounded-xl">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
+                        <div class="space-y-1">
+                            <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Simpangan Baku (σ)</span>
+                            <h4 class="text-2xl font-extrabold text-glow">10.05</h4>
+                            <p class="text-xs text-amber-500">Rentang Variansi Normal</p>
+                        </div>
+                        <div class="p-3 bg-purple-500/10 text-purple-500 rounded-xl">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
+                        <div class="space-y-1">
+                            <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Anomali Terdeteksi</span>
+                            <h4 class="text-2xl font-extrabold text-glow">0.30%</h4>
+                            <p class="text-xs text-emerald-500">Sangat Rendah (Aman)</p>
+                        </div>
+                        <div class="p-3 bg-fuchsia-500/10 text-fuchsia-500 rounded-xl">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-4">
+                    <!-- Narasi Analitis -->
+                    <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4">
+                        <h4 class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3">Narasi Kesimpulan Eksperimen</h4>
+                        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                            Berdasarkan pemrosesan data menggunakan metode statistik dalam Python, dataset sampel ini menunjukkan kecenderungan terdistribusi secara normal. Nilai rata-rata dari seluruh data berada pada angka <span class="font-semibold text-brand-600 dark:text-brand-400">50.12</span>, yang mendekati parameter ideal rancangan eksperimen kita yaitu 50.
+                        </p>
+                        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                            Dengan simpangan baku sebesar <span class="font-semibold text-brand-600 dark:text-brand-400">10.05</span>, sebaran data mematuhi kaidah empiris (68-95-99.7). Anomali (outliers) di luar rentang $3\sigma$ sangat minim, yaitu hanya di kisaran 0.30% saja, yang mengonfirmasi kestabilan proses penarikan sampel.
+                        </p>
+                    </div>
+
+                    <!-- CTA ke Konsol Utama -->
+                    <div class="glassmorphism glass-card rounded-2xl p-6 flex flex-col justify-between items-start space-y-4">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Ingin Memeriksa Integritas Data Secara Langsung?</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Anda dapat menguji hasil estimasi ini, menyortir tabel data asli secara dinamis, mengonfigurasi ulang kurva distribusi, atau memeriksa log keluaran respons API di dalam konsol pengolahan data.
+                            </p>
+                        </div>
+                        <button onclick="enterAppConsole()" class="w-full sm:w-auto px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg shadow-brand-500/20 transition-all hover:scale-[1.02]">
+                            Masuk ke Ruang Kerja Konsol &rarr;
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER LANDING PAGE -->
+        <footer class="glassmorphism border-t mt-16 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500">
+                    &copy; 2026 PyAnalytics Studio. Dibuat sebagai Portofolio Analisis Terintegrasi Python.
+                </p>
+                <div class="flex space-x-4 text-xs text-slate-500">
+                    <a href="#about-project" class="hover:text-brand-500 transition-colors">Tentang</a>
+                    <span>&bull;</span>
+                    <a href="#workflow" class="hover:text-brand-500 transition-colors">Metodologi</a>
+                    <span>&bull;</span>
+                    <button onclick="enterAppConsole()" class="hover:text-brand-500 transition-colors font-bold">Buka Konsol</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ================= VIEW 2: APP CONSOLE WORKSPACE ================= -->
+    <div id="view-app-workspace" class="hidden flex flex-col min-h-screen transition-all duration-500">
+        
+        <!-- HEADER KONSOL OPERASIONAL -->
+        <header class="sticky top-0 z-40 w-full glassmorphism border-b transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo & Button Back to Landing -->
+                    <div class="flex items-center space-x-3">
+                        <button onclick="leaveAppConsole()" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 rounded-xl text-xs font-bold transition-all hover:translate-x-[-2px]">
+                            <span>&larr;</span>
+                            <span>Halaman Depan</span>
+                        </button>
+                        <span class="text-slate-400 dark:text-slate-600">|</span>
+                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">App Workspace</span>
+                    </div>
+
+                    <!-- Tab Navigasi Khusus Internal Konsol -->
+                    <nav class="hidden md:flex space-x-1 bg-slate-200/30 dark:bg-slate-900/30 p-1 rounded-xl border border-slate-300/10">
+                        <button onclick="switchTab('data-table')" id="nav-data-table" class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
+                            Tabel Data Asli
+                        </button>
+                        <button onclick="switchTab('visualization')" id="nav-visualization" class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
+                            Visualisasi Kurva
+                        </button>
+                        <button onclick="switchTab('api-doc')" id="nav-api-doc" class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
+                            Integrasi Python (API)
+                        </button>
+                    </nav>
+
+                    <div class="flex items-center space-x-3">
+                        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/50 dark:hover:bg-slate-800/80 border border-slate-300/30 dark:border-slate-700/30 transition-all text-slate-700 dark:text-slate-300" title="Ubah Tema">
+                            <svg id="sun-icon-workspace" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+                            </svg>
+                            <svg id="moon-icon-workspace" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </button>
+
+                        <button onclick="toggleMobileMenuWorkspace()" class="md:hidden p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Mobile Konsol -->
+            <div id="mobile-menu-workspace" class="hidden md:hidden px-4 pt-2 pb-4 space-y-1 glassmorphism border-t">
+                <button onclick="switchTab('data-table'); toggleMobileMenuWorkspace();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
+                    Tabel Data Asli
+                </button>
+                <button onclick="switchTab('visualization'); toggleMobileMenuWorkspace();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
+                    Visualisasi Kurva
+                </button>
+                <button onclick="switchTab('api-doc'); toggleMobileMenuWorkspace();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
+                    Integrasi Python (API)
+                </button>
+            </div>
+        </header>
+
+        <!-- AREA UTAMA KONSOL -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+
+            <!-- ================= TAB: DATA TABLE ================= -->
+            <section id="tab-data-table" class="tab-content space-y-6 hidden">
+                <div class="border-l-4 border-brand-500 pl-4">
+                    <h3 class="text-2xl font-bold">Modul Tabel Data Asli</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Dataset mentah berisikan data sampel sebelum klasterisasi lanjut</p>
+                </div>
+
+                <div class="glassmorphism glass-card rounded-2xl p-4 sm:p-6 space-y-4">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+                        <div class="relative w-full sm:w-80">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </span>
+                            <input type="text" id="table-search" oninput="handleTableSearch()" placeholder="Cari ID Sampel atau Kategori..." class="w-full pl-10 pr-4 py-2 text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-900 dark:text-slate-100">
+                        </div>
+
+                        <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+                            <select id="table-page-size" onchange="handlePageSizeChange()" class="text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <option value="10">10 baris / hal</option>
+                                <option value="25" selected>25 baris / hal</option>
+                                <option value="50">50 baris / hal</option>
+                                <option value="100">100 baris / hal</option>
+                            </select>
+                            <button onclick="downloadCSV()" class="px-4 py-2 bg-brand-500/10 hover:bg-brand-500/20 text-brand-600 dark:text-brand-400 border border-brand-500/20 rounded-xl text-xs font-bold transition-all flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                Ekspor CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-300/20 dark:border-slate-700/20">
+                        <table class="min-w-full divide-y divide-slate-200/30 dark:divide-slate-700/30">
+                            <thead class="bg-slate-200/20 dark:bg-slate-800/20">
+                                <tr>
+                                    <th scope="col" onclick="sortTable('id')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                        <div class="flex items-center space-x-1">
+                                            <span>Sample ID</span>
+                                            <span id="sort-indicator-id" class="text-slate-400">↕</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick="sortTable('timestamp')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                        <div class="flex items-center space-x-1">
+                                            <span>Waktu</span>
+                                            <span id="sort-indicator-timestamp" class="text-slate-400">↕</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick="sortTable('value')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                        <div class="flex items-center space-x-1">
+                                            <span>Nilai Mentah (X)</span>
+                                            <span id="sort-indicator-value" class="text-slate-400">↕</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick="sortTable('zScore')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                        <div class="flex items-center space-x-1">
+                                            <span>Z-Score (Python Calc)</span>
+                                            <span id="sort-indicator-zScore" class="text-slate-400">↕</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick="sortTable('category')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                        <div class="flex items-center space-x-1">
+                                            <span>Klasifikasi</span>
+                                            <span id="sort-indicator-category" class="text-slate-400">↕</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body" class="divide-y divide-slate-200/20 dark:divide-slate-700/20 text-xs">
+                                <!-- Baris diisi oleh JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-300/20 dark:border-slate-700/20">
+                        <span class="text-xs text-slate-500" id="table-stats-text">
+                            Menampilkan 1-25 dari 1.000 data
+                        </span>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="prevPage()" class="p-2 bg-slate-200/30 dark:bg-slate-800/30 border border-slate-300/30 dark:border-slate-700/30 rounded-xl hover:bg-slate-200/60 dark:hover:bg-slate-800/60 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" id="btn-prev-page">
+                                Sebelumnya
+                            </button>
+                            <div class="flex items-center space-x-1" id="pagination-pages">
+                                <!-- Nomor halaman dinamis -->
+                            </div>
+                            <button onclick="nextPage()" class="p-2 bg-slate-200/30 dark:bg-slate-800/30 border border-slate-300/30 dark:border-slate-700/30 rounded-xl hover:bg-slate-200/60 dark:hover:bg-slate-800/60 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" id="btn-next-page">
+                                Berikutnya
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB: VISUALIZATION ================= -->
+            <section id="tab-visualization" class="tab-content space-y-6 hidden">
+                <div class="border-l-4 border-brand-500 pl-4">
+                    <h3 class="text-2xl font-bold">Modul Visualisasi Kurva Sampling</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Merender visualisasi kurva interaktif berdasarkan estimasi koordinat backend</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- PANEL KONTROL PARAMETER (Simulasi Parameter Python) -->
+                    <div class="glassmorphism glass-card rounded-2xl p-6 space-y-6">
+                        <h4 class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3">Parameter Distribusi</h4>
+                        
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Model Kurva / Distribusi</label>
+                            <select id="param-dist-model" onchange="handleModelChange()" class="w-full text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <option value="normal">Distribusi Normal Gaussian</option>
+                                <option value="trend">Trend Line dengan Noise Acak</option>
+                            </select>
+                        </div>
+
+                        <!-- Parameter 1 (Rata-rata / Mean) -->
+                        <div class="space-y-2" id="wrapper-param-mean">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Rata-rata (Mean / μ)</label>
+                                <span class="text-sm font-bold text-brand-600 dark:text-brand-400" id="label-mean">50</span>
+                            </div>
+                            <input type="range" id="param-mean" min="10" max="90" step="1" value="50" oninput="updateParamValue('mean', this.value)" class="w-full accent-brand-500">
+                            <div class="flex justify-between text-[10px] text-slate-400">
+                                <span>Min: 10</span>
+                                <span>Maks: 90</span>
+                            </div>
+                        </div>
+
+                        <!-- Parameter 2 (Simpangan Baku / Deviasi) -->
+                        <div class="space-y-2" id="wrapper-param-std">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Simpangan Baku (σ)</label>
+                                <span class="text-sm font-bold text-brand-600 dark:text-brand-400" id="label-std">10</span>
+                            </div>
+                            <input type="range" id="param-std" min="2" max="25" step="0.5" value="10" oninput="updateParamValue('std', this.value)" class="w-full accent-brand-500">
+                            <div class="flex justify-between text-[10px] text-slate-400">
+                                <span>Min: 2</span>
+                                <span>Maks: 25</span>
+                            </div>
+                        </div>
+
+                        <!-- Parameter 3 (Jumlah Sampel / N) -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Ukuran Sampel (N)</label>
+                                <span class="text-sm font-bold text-brand-600 dark:text-brand-400" id="label-n">1000</span>
+                            </div>
+                            <input type="range" id="param-n" min="100" max="2000" step="100" value="1000" oninput="updateParamValue('n', this.value)" class="w-full accent-brand-500">
+                            <div class="flex justify-between text-[10px] text-slate-400">
+                                <span>100</span>
+                                <span>2.000</span>
+                            </div>
+                        </div>
+
+                        <!-- Parameter Khusus Noise (Untuk model Tren) -->
+                        <div class="space-y-2 hidden" id="wrapper-param-noise">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Noise Multiplier</label>
+                                <span class="text-sm font-bold text-brand-600 dark:text-brand-400" id="label-noise">5</span>
+                            </div>
+                            <input type="range" id="param-noise" min="0" max="20" step="1" value="5" oninput="updateParamValue('noise', this.value)" class="w-full accent-brand-500">
+                            <div class="flex justify-between text-[10px] text-slate-400">
+                                <span>Min: 0 (Murni)</span>
+                                <span>Maks: 20 (Sangat Acak)</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-300/30 dark:border-slate-700/30">
+                            <button onclick="runPythonSimulation()" class="w-full py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-lg transition-all flex items-center justify-center text-sm">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                                Run Python Calc
+                            </button>
+                            <p class="text-[11px] text-slate-500 text-center mt-2">Menghitung ulang koordinat kurva secara matematis presisi.</p>
+                        </div>
+                    </div>
+
+                    <!-- PANEL GRAFIK INTERAKTIF -->
+                    <div class="lg:col-span-2 flex flex-col justify-between space-y-4">
+                        <div class="glassmorphism glass-card rounded-2xl p-4 sm:p-6 flex-1 flex flex-col min-h-[400px]">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-4 border-b border-slate-300/30 dark:border-slate-700/30">
+                                <div>
+                                    <h4 class="font-bold text-lg" id="chart-title">Visualisasi Distribusi Kerapatan Peluang (PDF)</h4>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">Arahkan kursor ke garis kurva untuk melihat rincian koordinat</p>
+                                </div>
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300" id="chart-indicator-type">
+                                    Gauss Normal
+                                </span>
+                            </div>
+
+                            <div class="relative flex-1 w-full flex items-center justify-center">
+                                <canvas id="sampling-chart" class="w-full h-full"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphism glass-card rounded-2xl p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <h5 class="text-xs font-bold text-slate-400 uppercase">Interpretasi Z-Score Terpilih</h5>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                    Berdasarkan Aturan 3-Sigma: <br>
+                                    • ±1σ mencakup <strong>68.27%</strong> data.<br>
+                                    • ±2σ mencakup <strong>95.45%</strong> data.<br>
+                                    • ±3σ mencakup <strong>99.73%</strong> data sampel.
+                                </p>
+                            </div>
+                            <div class="space-y-1">
+                                <h5 class="text-xs font-bold text-slate-400 uppercase">Fungsi Densitas Peluang (PDF Formula)</h5>
+                                <p class="text-xs font-mono text-slate-600 dark:text-slate-300 py-1 bg-slate-200/40 dark:bg-slate-900/40 rounded-lg text-center">
+                                    f(x) = [1 / (σ √(2π))] * e^(-0.5 * ((x-μ)/σ)²)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB: API & PYTHON DOCS ================= -->
+            <section id="tab-api-doc" class="tab-content space-y-6 hidden">
+                <div class="border-l-4 border-brand-500 pl-4">
+                    <h3 class="text-2xl font-bold">Konektivitas &amp; Integrasi Backend Python</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Merapikan integrasi data dari API berbasis FastAPI Python menuju UI Frontend</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Dokumentasi Endpoint & Kode Python -->
+                    <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-2">
+                                <span class="px-2.5 py-1 text-xs font-extrabold bg-green-500 text-white rounded-md">GET</span>
+                                <code class="text-xs font-mono text-slate-700 dark:text-slate-300">/api/v1/sampling-curve</code>
+                            </div>
+                            <h4 class="font-bold text-lg">Skrip Backend FastAPI Python</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Gunakan kode Python berikut untuk menyajikan data yang sepenuhnya kompatibel dengan struktur dasbor ini.
+                            </p>
+                        </div>
+
+                        <!-- Blok Kode Code-block -->
+                        <div class="bg-slate-950/90 rounded-xl p-4 overflow-x-auto border border-slate-800 text-[11px] text-slate-300 font-mono space-y-1">
+                            <p class="text-emerald-400">from fastapi import FastAPI</p>
+                            <p class="text-emerald-400">import numpy as np</p>
+                            <p class="text-emerald-400">from scipy.stats import norm</p>
+                            <p class="text-slate-500"># Inisialisasi API</p>
+                            <p><span class="text-indigo-400">app</span> = FastAPI()</p>
+                            <br>
+                            <p><span class="text-amber-400">@app.get</span>(<span class="text-emerald-300">"/api/v1/sampling-curve"</span>)</p>
+                            <p><span class="text-purple-400">def</span> <span class="text-sky-400">get_sampling_curve</span>(mean: float = 50, std: float = 10, n: int = 1000):</p>
+                            <p class="pl-4 text-slate-500"># Generate titik X dalam rentang kurva</p>
+                            <p class="pl-4">x = np.linspace(mean - 4*std, mean + 4*std, 100)</p>
+                            <p class="pl-4 text-slate-500"># Hitung Probabilitas Densitas (Y)</p>
+                            <p class="pl-4">y = norm.pdf(x, mean, std)</p>
+                            <p class="pl-4 text-purple-400">return</p> {
+                            <p class="pl-8"><span class="text-emerald-300">"mean"</span>: mean,</p>
+                            <p class="pl-8"><span class="text-emerald-300">"std_dev"</span>: std,</p>
+                            <p class="pl-8"><span class="text-emerald-300">"coordinates"</span>: [{"x": float(xi), "y": float(yi)} for xi, yi in zip(x, y)]</p>
+                            <p class="pl-4">}</p>
+                        </div>
+
+                        <div class="flex justify-between items-center text-[11px] text-slate-500">
+                            <span>Pustaka yang dibutuhkan: <code class="bg-slate-200/50 dark:bg-slate-800 px-1 py-0.5 rounded text-indigo-500 font-mono">fastapi uvicorn numpy scipy</code></span>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Konsol API Interaktif -->
+                    <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Simulator Konsol Respons API (JSON)</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">
+                                Ubah nilai parameter di Tab 2 dan saksikan perubahan representasi JSON yang diterima oleh web portal.
+                            </p>
+                        </div>
+
+                        <div class="relative bg-slate-950/95 border border-slate-800 rounded-xl p-4 flex-1 flex flex-col justify-between min-h-[300px]">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2 text-slate-500 text-[10px]">
+                                <span class="flex items-center"><span class="w-2.5 h-2.5 bg-green-500 rounded-full mr-1.5 inline-block animate-pulse"></span> 200 OK</span>
+                                <span>Aplikasi Terkoneksi (Simulasi)</span>
+                            </div>
+                            <pre id="api-json-console" class="text-xs font-mono text-indigo-300 overflow-y-auto max-h-[250px] flex-1 leading-relaxed">
+{
+  "status": "success",
+  "data": {
+    "distribution": "normal",
+    "params": {
+      "mean": 50.0,
+      "std_dev": 10.0,
+      "size": 1000
+    },
+    "preview_coordinates": [
+      {"x": 10, "y": 0.0001},
+      {"x": 20, "y": 0.0004},
+      {"x": 30, "y": 0.0044},
+      {"x": 40, "y": 0.0242},
+      {"x": 50, "y": 0.0399},
+      {"x": 60, "y": 0.0242}
+    ]
+  }
+}
+                            </pre>
+                            <div class="pt-2 border-t border-slate-800 flex justify-between items-center text-[10px] text-slate-500">
+                                <span>Metode: Fetch Async API JSON</span>
+                                <button onclick="copyToClipboard()" class="text-slate-400 hover:text-slate-200 transition-colors">Salin JSON</button>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-brand-500/10 rounded-xl border border-brand-500/20 text-xs text-slate-600 dark:text-slate-300">
+                            <strong>Keterangan:</strong> Modul frontend aplikasi ini menggunakan teknik asinkronus (Async/Await) untuk mensimulasikan skenario rendering real-time pasca pemrosesan Python.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER KONSOL -->
+        <footer class="glassmorphism border-t mt-16 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500">
+                    &copy; 2026 PyAnalytics Studio. Mode Kerja Dasbor Operasional.
+                </p>
+                <div class="flex space-x-4 text-xs text-slate-500">
+                    <button onclick="leaveAppConsole()" class="hover:text-brand-500 transition-colors">&larr; Kembali ke Landing Page</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ================= LOGIKA JAVASCRIPT UTAMA ================= -->
+    <script>
+        // ================= STATE & DATA GLOBAL =================
+        let rawDataset = [];
+        let filteredDataset = [];
+        let tableState = {
+            searchQuery: '',
+            sortColumn: 'id',
+            sortDirection: 'asc',
+            currentPage: 1,
+            pageSize: 25
+        };
+        let paramState = {
+            model: 'normal',
+            mean: 50,
+            std: 10,
+            n: 1000,
+            noise: 5
+        };
+        let samplingChart = null;
+
+        // ================= INISIALISASI SAAT LOAD =================
+        window.addEventListener('DOMContentLoaded', () => {
+            generateMockData(1000);
+            initChart();
+            renderTable();
+            updateJSONConsole();
+        });
+
+        // ================= TRANSISI ANTARA LANDING PAGE & WORKSPACE =================
+        function enterAppConsole() {
+            // Sembunyikan Landing Page, Tampilkan Konsol Kerja
+            const landing = document.getElementById('view-landing-page');
+            const workspace = document.getElementById('view-app-workspace');
+            
+            landing.classList.add('hidden');
+            workspace.classList.remove('hidden');
+            
+            // Atur default tab di dalam konsol ke 'Tabel Data Asli'
+            switchTab('data-table');
+            showToast("Masuk ke konsol aplikasi operasional.");
+            
+            // Paksa ChartJS merender ulang sesuai ukuran kontainer workspace yang baru
+            if (samplingChart) {
+                setTimeout(() => {
+                    samplingChart.resize();
+                    updateChartData();
+                }, 100);
+            }
+        }
+
+        function leaveAppConsole() {
+            const landing = document.getElementById('view-landing-page');
+            const workspace = document.getElementById('view-app-workspace');
+            
+            workspace.classList.add('hidden');
+            landing.classList.remove('hidden');
+            
+            showToast("Kembali ke Halaman Depan.");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ================= FUNGSI NAVIGASI TAB KONSOL =================
+        function switchTab(tabId) {
+            // Sembunyikan semua tab operasional
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            // Tampilkan tab target
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            // Atur status aktif pada tombol navigasi konsol
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200/20 dark:hover:bg-slate-800/20";
+            });
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = "nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-brand-600 dark:text-brand-400 bg-slate-200/50 dark:bg-slate-800/60 font-extrabold";
+            }
+            
+            showToast(`Modul ${getTabName(tabId)} dibuka.`);
+        }
+
+        function getTabName(tabId) {
+            switch(tabId) {
+                case 'data-table': return 'Tabel Data Asli';
+                case 'visualization': return 'Visualisasi Kurva';
+                case 'api-doc': return 'Konektivitas Python (API)';
+                default: return tabId;
+            }
+        }
+
+        function toggleMobileMenuWorkspace() {
+            const menu = document.getElementById('mobile-menu-workspace');
+            menu.classList.toggle('hidden');
+        }
+
+        // ================= KONTROL UTAMA TEMA (DARK / LIGHT) =================
+        function toggleTheme() {
+            const html = document.documentElement;
+            const sunIconLanding = document.getElementById('sun-icon-landing');
+            const moonIconLanding = document.getElementById('moon-icon-landing');
+            const sunIconWorkspace = document.getElementById('sun-icon-workspace');
+            const moonIconWorkspace = document.getElementById('moon-icon-workspace');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                // Sync Landing Icons
+                sunIconLanding.classList.add('hidden');
+                moonIconLanding.classList.remove('hidden');
+                // Sync Workspace Icons
+                sunIconWorkspace.classList.add('hidden');
+                moonIconWorkspace.classList.remove('hidden');
+                
+                showToast("Beralih ke Mode Terang");
+            } else {
+                html.classList.add('dark');
+                // Sync Landing Icons
+                sunIconLanding.classList.remove('hidden');
+                moonIconLanding.classList.add('hidden');
+                // Sync Workspace Icons
+                sunIconWorkspace.classList.remove('hidden');
+                moonIconWorkspace.classList.add('hidden');
+                
+                showToast("Beralih ke Mode Gelap");
+            }
+            
+            // Re-render chart jika sedang aktif untuk memperbarui warna teks/grid
+            if (samplingChart) {
+                setTimeout(updateChartData, 150);
+            }
+        }
+
+        // ================= NOTIFIKASI TOAST CUSTOM =================
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "glassmorphism glass-card rounded-xl px-4 py-3 text-xs font-semibold shadow-lg text-brand-600 dark:text-brand-300 border border-brand-500/20 max-w-sm pointer-events-auto transition-all duration-300 transform translate-x-12 opacity-0 flex items-center space-x-2";
+            
+            toast.innerHTML = `
+                <span class="w-1.5 h-1.5 bg-brand-500 rounded-full"></span>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove('translate-x-12', 'opacity-0');
+            }, 10);
+
+            // Bersihkan toast setelah 2.5 detik
+            setTimeout(() => {
+                toast.classList.add('translate-x-12', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 2500);
+        }
+
+        // ================= GENERATOR DATA IMITASI PYTHON =================
+        function generateMockData(count) {
+            const dataset = [];
+            const mean = 50.12;
+            const stdDev = 10.05;
+            
+            // Membangkitkan data terdistribusi normal (Metode Box-Muller)
+            for (let i = 1; i <= count; i++) {
+                let u = 0, v = 0;
+                while(u === 0) u = Math.random(); 
+                while(v === 0) v = Math.random();
+                let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+                
+                // Distribusikan normal dengan mu=50.12, sigma=10.05
+                let val = num * stdDev + mean;
+                let zScore = (val - mean) / stdDev;
+                
+                // Berikan cap kategori klasifikasi
+                let category = "Normal (Aman)";
+                if (Math.abs(zScore) > 3.0) {
+                    category = "Anomali Kritis";
+                } else if (Math.abs(zScore) > 1.96) {
+                    category = "Peringatan Luar";
+                }
+                
+                // Format waktu
+                let date = new Date(Date.now() - (count - i) * 10 * 1000);
+                let timeStr = date.toISOString().replace('T', ' ').substring(0, 19);
+
+                dataset.push({
+                    id: `SMPL-${String(i).padStart(4, '0')}`,
+                    timestamp: timeStr,
+                    value: parseFloat(val.toFixed(4)),
+                    zScore: parseFloat(zScore.toFixed(4)),
+                    category: category
+                });
+            }
+            rawDataset = dataset;
+            filteredDataset = [...dataset];
+        }
+
+        // ================= LOGIKA TABEL DATA =================
+        function renderTable() {
+            const tbody = document.getElementById('table-body');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+
+            const startIdx = (tableState.currentPage - 1) * tableState.pageSize;
+            const endIdx = startIdx + tableState.pageSize;
+            const pageData = filteredDataset.slice(startIdx, endIdx);
+
+            if (pageData.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="px-6 py-8 text-center text-slate-500">
+                            Tidak ada data yang cocok dengan kriteria pencarian Anda.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            pageData.forEach(row => {
+                let badgeClass = "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
+                if (row.category === "Anomali Kritis") {
+                    badgeClass = "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 animate-pulse";
+                } else if (row.category === "Peringatan Luar") {
+                    badgeClass = "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300";
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-200/10 dark:hover:bg-slate-800/10 transition-colors";
+                tr.innerHTML = `
+                    <td class="px-6 py-3 font-semibold font-mono text-xs text-brand-600 dark:text-brand-400">${row.id}</td>
+                    <td class="px-6 py-3 text-[11px] text-slate-500">${row.timestamp}</td>
+                    <td class="px-6 py-3 font-medium">${row.value}</td>
+                    <td class="px-6 py-3 font-mono text-xs">${row.zScore > 0 ? '+' : ''}${row.zScore}</td>
+                    <td class="px-6 py-3">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ${badgeClass}">
+                            ${row.category}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const total = filteredDataset.length;
+            const currentMax = Math.min(endIdx, total);
+            const currentMin = total === 0 ? 0 : startIdx + 1;
+            document.getElementById('table-stats-text').innerText = `Menampilkan ${currentMin}-${currentMax} dari ${total.toLocaleString('id-ID')} data`;
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const pagesContainer = document.getElementById('pagination-pages');
+            if(!pagesContainer) return;
+            pagesContainer.innerHTML = '';
+            
+            const totalPages = Math.ceil(filteredDataset.length / tableState.pageSize);
+
+            if (totalPages > 1) {
+                appendPageBtn(1);
+            }
+
+            let start = Math.max(2, tableState.currentPage - 1);
+            let end = Math.min(totalPages - 1, tableState.currentPage + 1);
+
+            if (tableState.currentPage <= 2) {
+                end = Math.min(totalPages - 1, 4);
+            }
+            if (tableState.currentPage >= totalPages - 1) {
+                start = Math.max(2, totalPages - 3);
+            }
+
+            if (start > 2) {
+                const dots = document.createElement('span');
+                dots.className = "text-slate-400 px-1 text-xs";
+                dots.innerText = "...";
+                pagesContainer.appendChild(dots);
+            }
+
+            for (let i = start; i <= end; i++) {
+                appendPageBtn(i);
+            }
+
+            if (end < totalPages - 1) {
+                const dots = document.createElement('span');
+                dots.className = "text-slate-400 px-1 text-xs";
+                dots.innerText = "...";
+                pagesContainer.appendChild(dots);
+            }
+
+            if (totalPages > 0) {
+                appendPageBtn(totalPages);
+            }
+
+            document.getElementById('btn-prev-page').disabled = tableState.currentPage === 1;
+            document.getElementById('btn-next-page').disabled = tableState.currentPage === totalPages || totalPages === 0;
+        }
+
+        function appendPageBtn(pageNo) {
+            const pagesContainer = document.getElementById('pagination-pages');
+            const btn = document.createElement('button');
+            btn.className = `w-8 h-8 rounded-lg text-xs font-semibold transition-all ${tableState.currentPage === pageNo ? 'bg-brand-500 text-white' : 'hover:bg-slate-200/50 dark:hover:bg-slate-800/50'}`;
+            btn.innerText = pageNo;
+            btn.onclick = () => {
+                tableState.currentPage = pageNo;
+                renderTable();
+            };
+            pagesContainer.appendChild(btn);
+        }
+
+        function prevPage() {
+            if (tableState.currentPage > 1) {
+                tableState.currentPage--;
+                renderTable();
+            }
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(filteredDataset.length / tableState.pageSize);
+            if (tableState.currentPage < totalPages) {
+                tableState.currentPage++;
+                renderTable();
+            }
+        }
+
+        function handlePageSizeChange() {
+            const select = document.getElementById('table-page-size');
+            tableState.pageSize = parseInt(select.value);
+            tableState.currentPage = 1;
+            renderTable();
+        }
+
+        function handleTableSearch() {
+            const query = document.getElementById('table-search').value.toLowerCase().trim();
+            tableState.searchQuery = query;
+            tableState.currentPage = 1;
+
+            if (query === '') {
+                filteredDataset = [...rawDataset];
+            } else {
+                filteredDataset = rawDataset.filter(item => {
+                    return item.id.toLowerCase().includes(query) || 
+                           item.category.toLowerCase().includes(query) || 
+                           item.value.toString().includes(query);
+                });
+            }
+            renderTable();
+        }
+
+        function sortTable(column) {
+            if (tableState.sortColumn === column) {
+                tableState.sortDirection = tableState.sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                tableState.sortColumn = column;
+                tableState.sortDirection = 'asc';
+            }
+
+            document.querySelectorAll("[id^='sort-indicator-']").forEach(span => span.innerText = '↕');
+            const indicator = document.getElementById(`sort-indicator-${column}`);
+            if(indicator) {
+                indicator.innerText = tableState.sortDirection === 'asc' ? '↑' : '↓';
+            }
+
+            filteredDataset.sort((a, b) => {
+                let valA = a[column];
+                let valB = b[column];
+
+                if (typeof valA === 'string') {
+                    return tableState.sortDirection === 'asc' 
+                        ? valA.localeCompare(valB) 
+                        : valB.localeCompare(valA);
+                } else {
+                    return tableState.sortDirection === 'asc' 
+                        ? valA - valB 
+                        : valB - valA;
+                }
+            });
+
+            tableState.currentPage = 1;
+            renderTable();
+        }
+
+        function downloadCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Sample ID,Waktu,Nilai Mentah,Z-Score,Klasifikasi\n";
+            filteredDataset.forEach(row => {
+                csvContent += `${row.id},${row.timestamp},${row.value},${row.zScore},${row.category}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Data_Asli_Sampling_${Date.now()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("CSV berhasil diunduh.");
+        }
+
+
+        // ================= LOGIKA GRAFIK & ESTIMASI KURVA =================
+        function initChart() {
+            const ctx = document.getElementById('sampling-chart');
+            if(!ctx) return;
+            const context = ctx.getContext('2d');
+            
+            samplingChart = new Chart(context, {
+                type: 'line',
+                data: {
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#475569',
+                                font: {
+                                    family: '"Nova Flat"',
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Nilai Y: ${context.parsed.y.toFixed(5)}`;
+                                },
+                                title: function(context) {
+                                    return `Titik X: ${context[0].parsed.x.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            grid: {
+                                color: document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                color: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#475569',
+                                font: {
+                                    family: '"Nova Flat"'
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                color: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#475569',
+                                font: {
+                                    family: '"Nova Flat"'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            updateChartData();
+        }
+
+        function updateParamValue(paramKey, value) {
+            paramState[paramKey] = parseFloat(value);
+            const label = document.getElementById(`label-${paramKey}`);
+            if(label) label.innerText = value;
+            
+            updateChartData();
+            updateJSONConsole();
+        }
+
+        function handleModelChange() {
+            const model = document.getElementById('param-dist-model').value;
+            paramState.model = model;
+
+            if (model === 'normal') {
+                document.getElementById('wrapper-param-mean').classList.remove('hidden');
+                document.getElementById('wrapper-param-std').classList.remove('hidden');
+                document.getElementById('wrapper-param-noise').classList.add('hidden');
+                document.getElementById('chart-title').innerText = "Visualisasi Distribusi Kerapatan Peluang (PDF)";
+                document.getElementById('chart-indicator-type').innerText = "Gauss Normal";
+            } else {
+                document.getElementById('wrapper-param-mean').classList.add('hidden');
+                document.getElementById('wrapper-param-std').classList.add('hidden');
+                document.getElementById('wrapper-param-noise').classList.remove('hidden');
+                document.getElementById('chart-title').innerText = "Simulasi Tren Linear Hasil Regresi Python";
+                document.getElementById('chart-indicator-type').innerText = "Linear Regression + Noise";
+            }
+            updateChartData();
+            updateJSONConsole();
+        }
+
+        function calculateNormalPDF(x, mean, std) {
+            const exponent = Math.exp(-0.5 * Math.pow((x - mean) / std, 2));
+            return (1 / (std * Math.sqrt(2 * Math.PI))) * exponent;
+        }
+
+        function updateChartData() {
+            if (!samplingChart) return;
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#94a3b8' : '#475569';
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+
+            let datasets = [];
+
+            if (paramState.model === 'normal') {
+                const points = [];
+                const mean = paramState.mean;
+                const std = paramState.std;
+                
+                const minX = mean - 4 * std;
+                const maxX = mean + 4 * std;
+                const step = (maxX - minX) / 100;
+
+                for (let x = minX; x <= maxX; x += step) {
+                    points.push({ x: x, y: calculateNormalPDF(x, mean, std) });
+                }
+
+                datasets = [{
+                    label: `Normal PDF (μ=${mean}, σ=${std})`,
+                    data: points,
+                    borderColor: '#8b5cf6',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    fill: true,
+                    backgroundColor: 'rgba(139, 92, 246, 0.08)',
+                    tension: 0.3
+                }];
+            } else {
+                const pointsScatter = [];
+                const pointsTrend = [];
+                const n = Math.min(250, paramState.n);
+                
+                for (let i = 0; i < n; i++) {
+                    const x = (i / n) * 100;
+                    const randNoise = (Math.random() - 0.5) * paramState.noise;
+                    const y = 0.5 * x + 10 + randNoise;
+                    pointsScatter.push({ x: x, y: y });
+                    pointsTrend.push({ x: x, y: 0.5 * x + 10 });
+                }
+
+                datasets = [
+                    {
+                        label: 'Garis Tren Teoretis Python',
+                        data: pointsTrend,
+                        borderColor: '#8b5cf6',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        pointHoverRadius: 6,
+                        showLine: true,
+                        fill: false,
+                        tension: 0
+                    },
+                    {
+                        label: 'Titik Sampel Lapangan',
+                        data: pointsScatter,
+                        borderColor: '#6366f1',
+                        backgroundColor: 'rgba(99, 102, 241, 0.4)',
+                        pointRadius: 3,
+                        showLine: false,
+                        type: 'scatter'
+                    }
+                ];
+            }
+
+            samplingChart.data.datasets = datasets;
+            samplingChart.options.scales.x.grid.color = gridColor;
+            samplingChart.options.scales.y.grid.color = gridColor;
+            samplingChart.options.scales.x.ticks.color = textColor;
+            samplingChart.options.scales.y.ticks.color = textColor;
+            samplingChart.options.plugins.legend.labels.color = textColor;
+            
+            samplingChart.update('none');
+        }
+
+        function runPythonSimulation() {
+            showToast("Memulai simulasi kalkulasi Python backend...");
+            
+            setTimeout(() => {
+                updateChartData();
+                showToast("Simulasi Python Berhasil! Data grafik telah diperbarui.");
+            }, 800);
+        }
+
+        // ================= LOGIKA INTEGRASI API JSON CONSOLE =================
+        function updateJSONConsole() {
+            const consolePre = document.getElementById('api-json-console');
+            if(!consolePre) return;
+            
+            let previewCoords = [];
+            if (paramState.model === 'normal') {
+                const mean = paramState.mean;
+                const std = paramState.std;
+                for (let i = -2; i <= 2; i++) {
+                    let xVal = mean + (i * std * 1.5);
+                    previewCoords.push({
+                        x: parseFloat(xVal.toFixed(2)),
+                        y: parseFloat(calculateNormalPDF(xVal, mean, std).toFixed(5))
+                    });
+                }
+            } else {
+                for (let i = 0; i < 5; i++) {
+                    let xVal = i * 20;
+                    previewCoords.push({
+                        x: xVal,
+                        y: parseFloat((0.5 * xVal + 10).toFixed(2))
+                    });
+                }
+            }
+
+            const response = {
+                status: "success",
+                timestamp: new Date().toISOString(),
+                data: {
+                    distribution_model: paramState.model,
+                    total_parameters: {
+                        mean: paramState.mean,
+                        std_dev: paramState.std,
+                        sample_size: paramState.n,
+                        noise_scale: paramState.noise
+                    },
+                    preview_coordinates: previewCoords
+                }
+            };
+
+            consolePre.innerText = JSON.stringify(response, null, 2);
+        }
+
+        function copyToClipboard() {
+            const consolePre = document.getElementById('api-json-console');
+            const textarea = document.createElement('textarea');
+            textarea.value = consolePre.innerText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast("JSON berhasil disalin ke clipboard!");
+        }
+    </script>
+</body>
+</html>
