@@ -39,6 +39,32 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Auto-rotation slider hero
     setInterval(nextHeroSlide, 5000);
+
+    // GSAP load animation untuk Hero Section
+    if (typeof gsap !== 'undefined') {
+        // Set awal posisi element
+        gsap.set("#about-project .lg\\:col-span-6:first-child > *", { opacity: 0, y: 30 });
+        gsap.set("#about-project .lg\\:col-span-6:last-child > *", { opacity: 0, scale: 0.95 });
+
+        // Jalankan animasi stagger untuk teks kiri
+        gsap.to("#about-project .lg\\:col-span-6:first-child > *", {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out"
+        });
+
+        // Jalankan animasi bounce/scale untuk gambar & slider kanan
+        gsap.to("#about-project .lg\\:col-span-6:last-child > *", {
+            opacity: 1,
+            scale: 1,
+            duration: 1.0,
+            stagger: 0.2,
+            ease: "back.out(1.2)",
+            delay: 0.3
+        });
+    }
 });
 
 // ================= TRANSISI ANTARA LANDING PAGE & WORKSPACE =================
@@ -47,11 +73,37 @@ function enterAppConsole() {
     const landing = document.getElementById('view-landing-page');
     const workspace = document.getElementById('view-app-workspace');
 
-    landing.classList.add('hidden');
-    workspace.classList.remove('hidden');
+    if (typeof gsap !== 'undefined') {
+        gsap.to(landing, {
+            opacity: 0,
+            y: -20,
+            duration: 0.3,
+            onComplete: () => {
+                landing.classList.add('hidden');
+                workspace.classList.remove('hidden');
+                
+                gsap.fromTo(workspace, {
+                    opacity: 0,
+                    y: 20
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        gsap.set(workspace, { clearProps: "all" });
+                    }
+                });
 
-    // Atur default tab di dalam konsol ke 'Tabel Data Asli'
-    switchTab('data-table');
+                switchTab('data-table');
+            }
+        });
+    } else {
+        landing.classList.add('hidden');
+        workspace.classList.remove('hidden');
+        switchTab('data-table');
+    }
+
     showToast("Masuk ke konsol aplikasi operasional.");
 
     // Paksa ChartJS merender ulang sesuai ukuran kontainer workspace yang baru
@@ -59,7 +111,7 @@ function enterAppConsole() {
         setTimeout(() => {
             samplingChart.resize();
             updateChartData();
-        }, 100);
+        }, 400);
     }
 }
 
@@ -67,21 +119,66 @@ function leaveAppConsole() {
     const landing = document.getElementById('view-landing-page');
     const workspace = document.getElementById('view-app-workspace');
 
-    workspace.classList.add('hidden');
-    landing.classList.remove('hidden');
+    if (typeof gsap !== 'undefined') {
+        gsap.to(workspace, {
+            opacity: 0,
+            y: 20,
+            duration: 0.3,
+            onComplete: () => {
+                workspace.classList.add('hidden');
+                landing.classList.remove('hidden');
+                
+                gsap.fromTo(landing, {
+                    opacity: 0,
+                    y: -20
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        gsap.set(landing, { clearProps: "all" });
+                    }
+                });
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    } else {
+        workspace.classList.add('hidden');
+        landing.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     showToast("Kembali ke Halaman Depan.");
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ================= FUNGSI NAVIGASI TAB KONSOL =================
 function switchTab(tabId) {
+    const activeTab = document.getElementById(`tab-${tabId}`);
+    if (!activeTab) return;
+
     // Sembunyikan semua tab operasional
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.add('hidden');
     });
     // Tampilkan tab target
-    document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+    activeTab.classList.remove('hidden');
+
+    if (typeof gsap !== 'undefined') {
+        gsap.fromTo(activeTab, {
+            opacity: 0,
+            y: 10
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            ease: "power1.out",
+            onComplete: () => {
+                gsap.set(activeTab, { clearProps: "opacity,transform,y" });
+            }
+        });
+    }
 
     // Atur status aktif pada tombol navigasi konsol
     document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -1004,6 +1101,19 @@ function showHeroSlide(index) {
             if (i === index) {
                 slide.classList.remove('hidden');
                 slide.classList.add('block');
+                if (typeof gsap !== 'undefined') {
+                    gsap.fromTo(slide, {
+                        opacity: 0,
+                        scale: 0.98,
+                        x: 15
+                    }, {
+                        opacity: 1,
+                        scale: 1,
+                        x: 0,
+                        duration: 0.45,
+                        ease: "power2.out"
+                    });
+                }
             } else {
                 slide.classList.remove('block');
                 slide.classList.add('hidden');
@@ -1051,6 +1161,27 @@ function openPythonSourceModal() {
     if (modal) {
         modal.classList.remove('hidden');
         modal.classList.add('flex');
+
+        const modalContent = modal.querySelector('.glassmorphism');
+        if (modalContent && typeof gsap !== 'undefined') {
+            gsap.fromTo(modalContent, {
+                scale: 0.9,
+                opacity: 0,
+                y: 20
+            }, {
+                scale: 1,
+                opacity: 1,
+                y: 0,
+                duration: 0.35,
+                ease: "back.out(1.2)"
+            });
+            gsap.fromTo(modal, {
+                opacity: 0
+            }, {
+                opacity: 1,
+                duration: 0.25
+            });
+        }
     }
 
     // Load SRS code on first open
@@ -1070,8 +1201,28 @@ function openPythonSourceModal() {
 function closePythonSourceModal() {
     const modal = document.getElementById('python-source-modal');
     if (modal) {
-        modal.classList.remove('flex');
-        modal.classList.add('hidden');
+        const modalContent = modal.querySelector('.glassmorphism');
+        if (modalContent && typeof gsap !== 'undefined') {
+            gsap.to(modalContent, {
+                scale: 0.9,
+                opacity: 0,
+                y: 20,
+                duration: 0.25,
+                ease: "power2.in"
+            });
+            gsap.to(modal, {
+                opacity: 0,
+                duration: 0.25,
+                onComplete: () => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                    gsap.set([modal, modalContent], { clearProps: "all" });
+                }
+            });
+        } else {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
     }
 }
 
