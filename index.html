@@ -10,7 +10,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kajabbej.github.io/analisis-data-py/" />
     <meta property="og:title" content="Enterprise Data Analytics Portal and Sampling Simulator" />
-    <meta property="og:description" content="Pusat kajian analisis data statistik terpadu dengan visualisasi kurva distribusi Gaussian, pemodelan regresi linear, dan simulasi pengambilan sampel acak secara dinamis." />
+    <meta property="og:description"
+        content="Pusat kajian analisis data statistik terpadu dengan visualisasi kurva distribusi Gaussian, pemodelan regresi linear, dan simulasi pengambilan sampel acak secara dinamis." />
     <meta property="og:image" content="https://kajabbej.github.io/analisis-data-py/hero_analysts_og.jpg" />
     <meta property="og:image:secure_url" content="https://kajabbej.github.io/analisis-data-py/hero_analysts_og.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -22,7 +23,8 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://kajabbej.github.io/analisis-data-py/" />
     <meta name="twitter:title" content="Enterprise Data Analytics Portal and Sampling Simulator" />
-    <meta name="twitter:description" content="Pusat kajian analisis data statistik terpadu dengan visualisasi kurva distribusi Gaussian, pemodelan regresi linear, dan simulasi pengambilan sampel acak secara dinamis." />
+    <meta name="twitter:description"
+        content="Pusat kajian analisis data statistik terpadu dengan visualisasi kurva distribusi Gaussian, pemodelan regresi linear, dan simulasi pengambilan sampel acak secara dinamis." />
     <meta name="twitter:image" content="https://kajabbej.github.io/analisis-data-py/hero_analysts_og.jpg" />
 
     <!-- Google Fonts - Plus Jakarta Sans & Nova Flat -->
@@ -38,6 +40,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- GSAP CDN -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <!-- GSAP TextPlugin CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -180,19 +184,9 @@
 
                         <!-- Left side: Big titles & CTA -->
                         <div class="lg:col-span-6 space-y-6">
-                            <div
-                                class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-white/10 text-[#00a3e0] border border-white/10 uppercase">
-                                <span class="relative flex h-2 w-2">
-                                    <span
-                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#00a3e0]"></span>
-                                </span>
-                                <span>Platform Portofolio &amp; Hasil Analisis Data</span>
-                            </div>
-
                             <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none uppercase">
-                                <span class="text-[#00a3e0] text-glow glow-glow block">Metode Statistika</span>
-                                <span class="text-white block mt-1">Data Analisis UTM</span>
+                                <span id="hero-title-1" class="text-[#00a3e0] text-glow glow-glow block">Metode Statistika</span>
+                                <span id="hero-title-2" class="text-white block mt-1">Data Analisis UTM</span>
                             </h2>
 
                             <p class="text-sm sm:text-base text-slate-200/90 leading-relaxed max-w-xl font-light">

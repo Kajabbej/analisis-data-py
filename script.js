@@ -42,8 +42,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // GSAP load animation untuk Hero Section
     if (typeof gsap !== 'undefined') {
-        // Inisialisasi pemisahan teks huruf demi huruf untuk header
-        initHeroTextSplitting();
+        // Register TextPlugin
+        gsap.registerPlugin(TextPlugin);
+
+        // Bersihkan text judul agar dapat diketik ulang
+        const title1 = document.getElementById('hero-title-1');
+        const title2 = document.getElementById('hero-title-2');
+        if (title1) title1.textContent = "";
+        if (title2) title2.textContent = "";
 
         // Set awal posisi element lainnya
         gsap.set("#about-project .lg\\:col-span-6:first-child > *:not(h2)", { opacity: 0, y: 30 });
@@ -52,33 +58,28 @@ window.addEventListener('DOMContentLoaded', () => {
         // Buat Timeline agar animasi berjalan teratur
         const tl = gsap.timeline();
 
-        // 1. Tagline di atas heading
-        tl.to("#about-project .lg\\:col-span-6:first-child > div:first-child", {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out"
+        // 1. Animasi mengetik judul pertama (Metode Statistika)
+        tl.to("#hero-title-1", {
+            duration: 1.4,
+            text: "Metode Statistika",
+            ease: "none"
         });
 
-        // 2. Animasi huruf demi huruf (Metode Statistika & Data Analisis UTM)
-        tl.to("#about-project h2 .char-span", {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            rotateX: 0,
-            duration: 0.45,
-            stagger: 0.03,
-            ease: "back.out(1.5)"
-        }, "-=0.25");
+        // 2. Animasi mengetik judul kedua (Data Analisis UTM)
+        tl.to("#hero-title-2", {
+            duration: 1.4,
+            text: "Data Analisis UTM",
+            ease: "none"
+        }, "+=0.15");
 
-        // 3. Deskripsi & tombol-tombol
+        // 3. Deskripsi & tombol-tombol (fading in)
         tl.to("#about-project .lg\\:col-span-6:first-child > p, #about-project .lg\\:col-span-6:first-child > div.pt-4", {
             opacity: 1,
             y: 0,
             duration: 0.6,
             stagger: 0.15,
             ease: "power2.out"
-        }, "-=0.3");
+        }, "-=0.2");
 
         // 4. Jalankan animasi bounce/scale untuk gambar & slider kanan
         gsap.to("#about-project .lg\\:col-span-6:last-child > *", {
@@ -87,7 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
             duration: 1.0,
             stagger: 0.25,
             ease: "back.out(1.2)",
-            delay: 0.6
+            delay: 0.5
         });
     }
 });
@@ -1296,43 +1297,4 @@ function selectModalTab(tabName) {
             btn.className = "w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all hover:bg-slate-200/50 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200";
         }
     });
-}
-
-// ================= UTILITY UNTUK ANIMASI HURUF DEMI HURUF =================
-function initHeroTextSplitting() {
-    const heading1 = document.querySelector("#about-project h2 span:first-child");
-    const heading2 = document.querySelector("#about-project h2 span:last-child");
-    
-    const splitWordAndChars = (element) => {
-        if (!element) return;
-        const words = element.innerText.split(' ');
-        element.innerHTML = '';
-        
-        words.forEach((word, wordIdx) => {
-            const wordSpan = document.createElement('span');
-            wordSpan.className = 'inline-block whitespace-nowrap';
-            
-            [...word].forEach(char => {
-                const charSpan = document.createElement('span');
-                charSpan.className = 'char-span inline-block';
-                charSpan.style.opacity = '0';
-                charSpan.style.transform = 'translateY(20px) scale(0.6) rotateX(-45deg)';
-                charSpan.style.transformOrigin = 'center bottom';
-                charSpan.textContent = char;
-                wordSpan.appendChild(charSpan);
-            });
-            
-            element.appendChild(wordSpan);
-            
-            if (wordIdx < words.length - 1) {
-                const space = document.createElement('span');
-                space.className = 'inline-block';
-                space.innerHTML = '&nbsp;';
-                element.appendChild(space);
-            }
-        });
-    };
-    
-    splitWordAndChars(heading1);
-    splitWordAndChars(heading2);
 }
