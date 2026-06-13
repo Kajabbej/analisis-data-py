@@ -36,147 +36,14 @@ window.addEventListener('DOMContentLoaded', () => {
     renderTable();
     initSamplingTable();
     updateJSONConsole();
+    switchTab('data-table');
 
-    // Auto-rotation slider hero
-    setInterval(nextHeroSlide, 5000);
-
-    // GSAP load animation untuk Hero Section
-    if (typeof gsap !== 'undefined') {
-        // Register TextPlugin
-        gsap.registerPlugin(TextPlugin);
-
-        // Bersihkan text judul agar dapat diketik ulang
-        const title1 = document.getElementById('hero-title-1');
-        const title2 = document.getElementById('hero-title-2');
-        if (title1) title1.textContent = "";
-        if (title2) title2.textContent = "";
-
-        // Set awal posisi element lainnya
-        gsap.set("#about-project .lg\\:col-span-6:first-child > *:not(h2)", { opacity: 0, y: 30 });
-        gsap.set("#about-project .lg\\:col-span-6:last-child > *", { opacity: 0, scale: 0.95 });
-
-        // Buat Timeline agar animasi berjalan teratur
-        const tl = gsap.timeline();
-
-        // 1. Animasi mengetik judul pertama (Metode Statistika)
-        tl.to("#hero-title-1", {
-            duration: 1.4,
-            text: "Metode Statistika",
-            ease: "none"
-        });
-
-        // 2. Animasi mengetik judul kedua (Data Analisis UTM)
-        tl.to("#hero-title-2", {
-            duration: 1.4,
-            text: "Data Analisis UTM",
-            ease: "none"
-        }, "+=0.15");
-
-        // 3. Deskripsi & tombol-tombol (fading in)
-        tl.to("#about-project .lg\\:col-span-6:first-child > p, #about-project .lg\\:col-span-6:first-child > div.pt-4", {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.15,
-            ease: "power2.out"
-        }, "-=0.2");
-
-        // 4. Jalankan animasi bounce/scale untuk gambar & slider kanan
-        gsap.to("#about-project .lg\\:col-span-6:last-child > *", {
-            opacity: 1,
-            scale: 1,
-            duration: 1.0,
-            stagger: 0.25,
-            ease: "back.out(1.2)",
-            delay: 0.5
-        });
-    }
+    // No landing page slider or typewriter initializations required in the app console.
 });
 
 // ================= TRANSISI ANTARA LANDING PAGE & WORKSPACE =================
-function enterAppConsole() {
-    // Sembunyikan Landing Page, Tampilkan Konsol Kerja
-    const landing = document.getElementById('view-landing-page');
-    const workspace = document.getElementById('view-app-workspace');
-
-    if (typeof gsap !== 'undefined') {
-        gsap.to(landing, {
-            opacity: 0,
-            y: -20,
-            duration: 0.3,
-            onComplete: () => {
-                landing.classList.add('hidden');
-                workspace.classList.remove('hidden');
-                
-                gsap.fromTo(workspace, {
-                    opacity: 0,
-                    y: 20
-                }, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.4,
-                    ease: "power2.out",
-                    onComplete: () => {
-                        gsap.set(workspace, { clearProps: "all" });
-                    }
-                });
-
-                switchTab('data-table');
-            }
-        });
-    } else {
-        landing.classList.add('hidden');
-        workspace.classList.remove('hidden');
-        switchTab('data-table');
-    }
-
-    showToast("Masuk ke konsol aplikasi operasional.");
-
-    // Paksa ChartJS merender ulang sesuai ukuran kontainer workspace yang baru
-    if (samplingChart) {
-        setTimeout(() => {
-            samplingChart.resize();
-            updateChartData();
-        }, 400);
-    }
-}
-
 function leaveAppConsole() {
-    const landing = document.getElementById('view-landing-page');
-    const workspace = document.getElementById('view-app-workspace');
-
-    if (typeof gsap !== 'undefined') {
-        gsap.to(workspace, {
-            opacity: 0,
-            y: 20,
-            duration: 0.3,
-            onComplete: () => {
-                workspace.classList.add('hidden');
-                landing.classList.remove('hidden');
-                
-                gsap.fromTo(landing, {
-                    opacity: 0,
-                    y: -20
-                }, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.4,
-                    ease: "power2.out",
-                    onComplete: () => {
-                        gsap.set(landing, { clearProps: "all" });
-                    }
-                });
-                
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
-    } else {
-        workspace.classList.add('hidden');
-        landing.classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    showToast("Kembali ke Halaman Depan.");
+    window.location.href = "landing pages.html";
 }
 
 // ================= FUNGSI NAVIGASI TAB KONSOL =================
@@ -222,7 +89,6 @@ function switchTab(tabId) {
         }, 50);
     }
 
-    showToast(`Modul ${getTabName(tabId)} dibuka.`);
 }
 
 function getTabName(tabId) {
@@ -556,7 +422,6 @@ function downloadCSV() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showToast("Mengunduh file Excel data asli...");
 }
 
 function handleExportSelect(elem) {
@@ -564,7 +429,6 @@ function handleExportSelect(elem) {
         downloadCSV();
     } else if (elem.value === 'kaggle') {
         window.open('https://www.kaggle.com/datasets/carrie1/ecommerce-data', '_blank');
-        showToast("Membuka dataset Kaggle...");
     }
     elem.value = "";
 }
@@ -1053,11 +917,8 @@ function nextSamplingPage() {
 }
 
 function runPythonSimulation() {
-    showToast("Memulai simulasi kalkulasi Python backend...");
-
     setTimeout(() => {
         updateChartData();
-        showToast("Simulasi Python Berhasil! Data grafik telah diperbarui.");
     }, 800);
 }
 
@@ -1113,49 +974,6 @@ function copyToClipboard() {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-    showToast("JSON berhasil disalin ke clipboard!");
-}
-
-// ================= HERO CAROUSEL / SLIDER FUNCTIONS =================
-let currentHeroSlide = 0;
-const totalHeroSlides = 3;
-
-function showHeroSlide(index) {
-    for (let i = 0; i < totalHeroSlides; i++) {
-        const slide = document.getElementById(`slide-${i}`);
-        if (slide) {
-            if (i === index) {
-                slide.classList.remove('hidden');
-                slide.classList.add('block');
-                if (typeof gsap !== 'undefined') {
-                    gsap.fromTo(slide, {
-                        opacity: 0,
-                        scale: 0.98,
-                        x: 15
-                    }, {
-                        opacity: 1,
-                        scale: 1,
-                        x: 0,
-                        duration: 0.45,
-                        ease: "power2.out"
-                    });
-                }
-            } else {
-                slide.classList.remove('block');
-                slide.classList.add('hidden');
-            }
-        }
-    }
-}
-
-function nextHeroSlide() {
-    currentHeroSlide = (currentHeroSlide + 1) % totalHeroSlides;
-    showHeroSlide(currentHeroSlide);
-}
-
-function prevHeroSlide() {
-    currentHeroSlide = (currentHeroSlide - 1 + totalHeroSlides) % totalHeroSlides;
-    showHeroSlide(currentHeroSlide);
 }
 
 // ================= DYNAMIC DIAGNOSA SWITCHER =================
@@ -1174,20 +992,17 @@ function toggleDiagnosaMethod(method) {
     document.getElementById('diag-ci-text').innerHTML = isSrs
         ? "Kami percaya 95% bahwa rata-rata populasi pendapatan harian sebenarnya berada di antara <strong>27.527</strong> dan <strong>35.110</strong>."
         : "Kami percaya 95% bahwa rata-rata populasi pendapatan harian sebenarnya berada di antara <strong>27.093</strong> dan <strong>35.820</strong>.";
-
-    showToast(`Diagnosa beralih ke metode ${isSrs ? 'Simple Random Sampling' : 'Stratified Random Sampling'}.`);
 }
 
-// ================= LOGIKA MODAL SUMBER PYTHON & GAMBAR =================
+// ================= PYTHON SOURCE MODAL SYSTEM FOR WORKSPACE =================
 let srsCodeLoaded = false;
 let stratifiedCodeLoaded = false;
 
 function openPythonSourceModal() {
     const modal = document.getElementById('python-source-modal');
     if (modal) {
+        modal.style.display = 'flex';
         modal.classList.remove('hidden');
-        modal.classList.add('flex');
-
         const modalContent = modal.querySelector('.glassmorphism');
         if (modalContent && typeof gsap !== 'undefined') {
             gsap.fromTo(modalContent, {
@@ -1201,26 +1016,15 @@ function openPythonSourceModal() {
                 duration: 0.35,
                 ease: "back.out(1.2)"
             });
-            gsap.fromTo(modal, {
-                opacity: 0
-            }, {
-                opacity: 1,
-                duration: 0.25
-            });
+            gsap.fromTo(modal, { opacity: 0 }, { opacity: 1, duration: 0.25 });
         }
     }
 
-    // Load SRS code on first open
     if (!srsCodeLoaded) {
-        fetchPythonScript('srs dan strata/sampling_srs.py', 'code-srs-viewer', () => {
-            srsCodeLoaded = true;
-        });
+        fetchPythonScript('srs dan strata/sampling_srs.py', 'code-srs-viewer', () => { srsCodeLoaded = true; });
     }
-    // Load Stratified code on first open
     if (!stratifiedCodeLoaded) {
-        fetchPythonScript('srs dan strata/sampling_stratified.py', 'code-stratified-viewer', () => {
-            stratifiedCodeLoaded = true;
-        });
+        fetchPythonScript('srs dan strata/sampling_stratified.py', 'code-stratified-viewer', () => { stratifiedCodeLoaded = true; });
     }
 }
 
@@ -1240,13 +1044,13 @@ function closePythonSourceModal() {
                 opacity: 0,
                 duration: 0.25,
                 onComplete: () => {
-                    modal.classList.remove('flex');
+                    modal.style.display = 'none';
                     modal.classList.add('hidden');
                     gsap.set([modal, modalContent], { clearProps: "all" });
                 }
             });
         } else {
-            modal.classList.remove('flex');
+            modal.style.display = 'none';
             modal.classList.add('hidden');
         }
     }
@@ -1255,10 +1059,9 @@ function closePythonSourceModal() {
 function fetchPythonScript(filePath, elementId, callback) {
     const viewer = document.getElementById(elementId);
     if (!viewer) return;
-
     fetch(filePath)
         .then(response => {
-            if (!response.ok) throw new Error("Gagal membaca file");
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return response.text();
         })
         .then(text => {
@@ -1266,20 +1069,26 @@ function fetchPythonScript(filePath, elementId, callback) {
             if (callback) callback();
         })
         .catch(err => {
-            viewer.textContent = `Gagal memuat file script: ${err.message}. Pastikan file berada di direktori local server Anda.`;
+            const isCors = err.message.includes('Failed to fetch') || err.name === 'TypeError';
+            viewer.textContent = isCors
+                ? `⚠️ Tidak bisa memuat file secara lokal (CORS).
+
+Solusi: Buka halaman melalui HTTP server:
+  • VS Code: klik kanan → "Open with Live Server"
+  • Terminal: npx serve .
+
+(Error asli: ${err.message})`
+                : `Gagal memuat script: ${err.message}.`;
         });
 }
 
 function selectModalTab(tabName) {
-    // Hide all panes
     const panes = document.querySelectorAll('.modal-pane');
     panes.forEach(pane => pane.classList.add('hidden'));
 
-    // Show selected pane
     const targetPane = document.getElementById(`modal-pane-${tabName}`);
     if (targetPane) targetPane.classList.remove('hidden');
 
-    // Update active tab styles
     const tabs = [
         { id: 'srs-code', btnId: 'modal-tab-srs-code' },
         { id: 'stratified-code', btnId: 'modal-tab-stratified-code' },
