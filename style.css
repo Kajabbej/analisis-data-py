@@ -5,35 +5,102 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.25);
 }
+
 .dark .glassmorphism {
     background: rgba(10, 15, 30, 0.55);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.06);
 }
+
 .glass-card {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 }
+
 .text-glow {
     text-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
 }
+
 body {
-    font-family: 'Nova Flat', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Google Sans', 'Product Sans', system-ui, -apple-system, sans-serif;
     background-attachment: fixed;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.font-nova {
+    font-family: 'Nova Flat', system-ui, -apple-system, sans-serif !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
     background: rgba(139, 92, 246, 0.3);
     border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(139, 92, 246, 0.6);
+}
+
+/* Custom UI/UX Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-12px) scale(1.02);
+    }
+}
+
+@keyframes float-delayed {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(12px) scale(0.98);
+    }
+}
+
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: float-delayed 8s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 10s ease-in-out infinite;
+}
+
+.glow-glow {
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.45));
 }

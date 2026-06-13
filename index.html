@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enterprise Data Analytics Portal & Sampling Simulator</title>
-    
-    <!-- Google Fonts - Nova Flat -->
+
+    <!-- Google Fonts - Plus Jakarta Sans & Nova Flat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nova+Flat&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Nova+Flat&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,7 +23,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Nova Flat"', 'system-ui', '-apple-system', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', '"Google Sans"', '"Product Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+                        nova: ['"Nova Flat"', 'system-ui', '-apple-system', 'sans-serif'],
                     },
                     colors: {
                         brand: {
@@ -44,249 +48,508 @@
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-darkBg dark:text-slate-100 min-h-screen font-sans antialiased overflow-x-hidden">
+
+<body
+    class="bg-slate-50 text-slate-900 dark:bg-darkBg dark:text-slate-100 min-h-screen font-sans antialiased overflow-x-hidden">
 
     <!-- Efek Dekorasi Latar Belakang Global -->
-    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/10 dark:bg-brand-900/15 blur-[120px] pointer-events-none z-[-1]"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/10 dark:bg-fuchsia-900/10 blur-[120px] pointer-events-none z-[-1]"></div>
+    <div
+        class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/10 dark:bg-brand-900/15 blur-[120px] pointer-events-none z-[-1]">
+    </div>
+    <div
+        class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/10 dark:bg-fuchsia-900/10 blur-[120px] pointer-events-none z-[-1]">
+    </div>
 
     <!-- NOTIFIKASI TOAST CUSTOM -->
     <div id="toast-container" class="fixed top-24 right-4 z-50 space-y-2 pointer-events-none"></div>
 
     <!-- ================= VIEW 1: PORTFOLIO LANDING PAGE ================= -->
     <div id="view-landing-page" class="flex flex-col min-h-screen transition-all duration-500">
-        
-        <!-- HEADER / NAVIGATION (LANDING PAGE STYLE) -->
-        <header class="sticky top-0 z-40 w-full glassmorphism border-b transition-all duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16">
-                    <div class="flex items-center space-x-3">
-                        <div class="p-2 bg-gradient-to-tr from-brand-500 to-indigo-600 rounded-xl text-white shadow-lg shadow-brand-500/30">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h1 class="text-lg font-bold bg-gradient-to-r from-brand-600 to-indigo-500 dark:from-brand-500 dark:to-indigo-300 bg-clip-text text-transparent">
-                                PyAnalytics Studio
-                            </h1>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Enterprise Portfolio Platform</p>
-                        </div>
-                    </div>
 
-                    <!-- Menu Internal Navigation Landing Page -->
-                    <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600 dark:text-slate-300">
-                        <a href="#about-project" class="hover:text-brand-500 transition-colors">Tentang Proyek</a>
-                        <a href="#workflow" class="hover:text-brand-500 transition-colors">Metodologi</a>
-                        <a href="#executive-metrics" class="hover:text-brand-500 transition-colors">Ringkasan Eksekutif</a>
+        <!-- HEADER / NAVIGATION (CLEAN MINIMALIST) -->
+        <header
+            class="sticky top-0 z-40 w-full bg-white/80 dark:bg-darkBg/85 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-sm transition-all duration-300">
+            <div class="w-full px-4 sm:px-8 lg:px-12 flex items-center justify-between h-16">
+
+                <!-- Logo Section -->
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-gradient-to-tr from-brand-600 to-indigo-600 rounded-xl text-white shadow-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1
+                            class="text-sm font-extrabold tracking-wider text-slate-900 dark:text-white uppercase leading-none">
+                            PyAnalytics
+                        </h1>
+                        <p
+                            class="text-[9px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mt-0.5">
+                            Data Studio</p>
+                    </div>
+                </div>
+
+                <!-- Right Side: Navigation & Actions -->
+                <div class="flex items-center space-x-6">
+                    <nav
+                        class="hidden md:flex items-center space-x-6 text-xs font-bold uppercase text-slate-600 dark:text-slate-300 tracking-wider">
+                        <a href="#about-project"
+                            class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Project</a>
+                        <a href="#about-me"
+                            class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">About Me</a>
+                        <a href="#contact-us"
+                            class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Contact Us</a>
                     </nav>
 
                     <div class="flex items-center space-x-3">
+                        <a href="#view-app-workspace" onclick="enterAppConsole();"
+                            class="px-4 py-2 bg-[#da291c] hover:bg-[#b51c14] text-white rounded-lg font-extrabold text-[10px] uppercase tracking-wider transition-all duration-300 shadow-md shadow-[#da291c]/20 hover:scale-[1.02] flex items-center space-x-1.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span>Analisis</span>
+                        </a>
+
                         <!-- Theme Toggle -->
-                        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/50 dark:hover:bg-slate-800/80 border border-slate-300/30 dark:border-slate-700/30 transition-all text-slate-700 dark:text-slate-300" title="Ubah Tema">
-                            <svg id="sun-icon-landing" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+                        <button onclick="toggleTheme()"
+                            class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 transition-all text-slate-700 dark:text-slate-200"
+                            title="Ubah Tema">
+                            <svg id="sun-icon-landing" class="w-4 h-4 hidden" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z">
+                                </path>
                             </svg>
-                            <svg id="moon-icon-landing" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            <svg id="moon-icon-landing" class="w-4 h-4" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                </path>
                             </svg>
-                        </button>
-                        
-                        <!-- CTA Masuk Konsol -->
-                        <button onclick="enterAppConsole()" class="px-5 py-2 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-md shadow-brand-500/10 transition-all hover:scale-[1.02] text-sm">
-                            Konsol Utama &rarr;
                         </button>
                     </div>
                 </div>
+
             </div>
         </header>
 
         <!-- LANDING PAGE HERO SECTION -->
-        <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-            
-            <section id="about-project" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-6">
-                <div class="lg:col-span-7 space-y-6">
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
-                        <span class="w-2 h-2 mr-2 bg-brand-500 rounded-full animate-ping"></span>
-                        Platform Portofolio &amp; Hasil Analisis Data
-                    </span>
-                    <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
-                        Presentasi Hasil Analisis &amp; <span class="bg-gradient-to-r from-brand-500 to-indigo-500 bg-clip-text text-transparent text-glow">Simulasi Kurva Terintegrasi</span>
-                    </h2>
-                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                        Proyek ini dikembangkan menggunakan pemrosesan data tangguh backend Python untuk memvalidasi jutaan baris data mentah. Antarmuka ini dirancang secara transparan demi menyajikan data asli, memvisualisasikan kurva secara akurat, serta menawarkan dashboard interaktif yang premium dan modern.
-                    </p>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <button onclick="enterAppConsole()" class="px-8 py-4 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-brand-500/20 transition-all hover:scale-[1.03] text-base">
-                            Buka Konsol Aplikasi &amp; Eksplorasi Data
-                        </button>
-                        <a href="#workflow" class="px-8 py-4 bg-white/10 hover:bg-white/20 dark:bg-slate-800/40 dark:hover:bg-slate-800/70 text-slate-800 dark:text-slate-200 font-bold rounded-xl border border-slate-300/50 dark:border-slate-700/50 transition-all text-center flex items-center justify-center">
-                            Pelajari Metodologi
-                        </a>
-                    </div>
+        <main class="flex-1 w-full py-0 space-y-16">
+
+            <section id="about-project"
+                class="font-nova relative overflow-hidden bg-gradient-to-br from-[#002d72] via-[#003c8f] to-[#001d4a] text-white w-full py-16 md:py-24 shadow-2xl border-y border-white/10">
+                <!-- Background grid design pattern -->
+                <div class="absolute inset-0 opacity-10 pointer-events-none"
+                    style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 20px 20px;">
                 </div>
 
-                <div class="lg:col-span-5 relative">
-                    <!-- Preview Card Visual sebagai Ilustrasi Platform -->
-                    <div class="glassmorphism glass-card rounded-3xl p-6 relative z-10 border-2 border-brand-500/20 shadow-2xl overflow-hidden group">
-                        <div class="absolute -right-16 -top-16 w-36 h-36 bg-brand-500/20 rounded-full blur-2xl"></div>
-                        <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-300/20 dark:border-slate-700/20">
-                            <span class="text-xs font-extrabold uppercase text-slate-400">Pratinjau Antarmuka Konsol</span>
-                            <span class="w-3 h-3 rounded-full bg-brand-500"></span>
+                <!-- Glowing cyan/red blur circles -->
+                <div
+                    class="absolute -left-20 -top-20 w-80 h-80 bg-[#00a3e0]/20 rounded-full blur-[80px] pointer-events-none animate-pulse-slow">
+                </div>
+                <div
+                    class="absolute -right-20 -bottom-20 w-80 h-80 bg-[#da291c]/10 rounded-full blur-[80px] pointer-events-none animate-pulse-slow">
+                </div>
+
+                <div class="w-full px-4 sm:px-8 lg:px-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+
+                        <!-- Left side: Big titles & CTA -->
+                        <div class="lg:col-span-6 space-y-6">
+                            <div
+                                class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-white/10 text-[#00a3e0] border border-white/10 uppercase">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#00a3e0]"></span>
+                                </span>
+                                <span>Platform Portofolio &amp; Hasil Analisis Data</span>
+                            </div>
+
+                            <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none uppercase">
+                                <span class="text-[#00a3e0] text-glow glow-glow block">Metode Statistika</span>
+                                <span class="text-white block mt-1">Data Analisis UTM</span>
+                            </h2>
+
+                            <p class="text-sm sm:text-base text-slate-200/90 leading-relaxed max-w-xl font-light">
+                                Pusat kajian analisis data statistik terpadu yang menyajikan visualisasi kurva
+                                distribusi
+                                Gaussian, pemodelan regresi linear, dan simulasi pengambilan sampel acak (*random
+                                sampling*)
+                                secara dinamis dan real-time.
+                            </p>
+
+                            <div class="pt-4 flex flex-wrap gap-4">
+                                <button onclick="enterAppConsole()"
+                                    class="px-8 py-3.5 bg-[#da291c] hover:bg-[#b51c14] text-white font-extrabold rounded-lg shadow-lg shadow-[#da291c]/30 transition-all hover:scale-[1.04] duration-300 text-sm uppercase tracking-wider">
+                                    View More &rarr;
+                                </button>
+                                <a href="#workflow"
+                                    class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-lg border border-white/20 transition-all hover:scale-[1.04] duration-300 text-xs uppercase tracking-wider flex items-center justify-center">
+                                    Metodologi
+                                </a>
+                            </div>
                         </div>
-                        <div class="space-y-4">
-                            <div class="h-32 bg-slate-900/30 rounded-2xl flex items-center justify-center p-2 border border-slate-300/10">
-                                <svg class="w-full h-24 text-brand-500/80 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 100 50">
-                                    <path d="M10,40 Q30,10 50,25 T90,10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
-                                    <circle cx="50" cy="25" r="4" fill="currentColor"></circle>
-                                    <line x1="50" y1="25" x2="50" y2="45" stroke="currentColor" stroke-dasharray="2" stroke-width="1.5"></line>
+
+                        <!-- Right side: Custom Team Image & Overlaid Report Cards Slider -->
+                        <div class="lg:col-span-6 relative mt-8 lg:mt-0 flex flex-col items-center">
+
+                            <!-- Main Professional Team Image with slanted borders -->
+                            <div
+                                class="w-full max-w-md h-64 rounded-2xl overflow-hidden border-4 border-white/20 shadow-2xl relative group">
+                                <img src="hero_analysts.png" alt="Data Analytics Team"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-[#002d72]/80 via-transparent to-transparent">
+                                </div>
+                            </div>
+
+                            <!-- Card Slider Overlay (Pertamina-style card slider) -->
+                            <div class="w-full max-w-sm -mt-16 relative z-20 px-4">
+                                <!-- Slider Container -->
+                                <div
+                                    class="relative overflow-hidden h-36 rounded-2xl border border-white/20 shadow-2xl bg-slate-900/80 backdrop-blur-xl p-5">
+
+                                    <!-- Card Slide 1 (Sampling Outlook) -->
+                                    <div class="carousel-slide space-y-2 transition-opacity duration-500 ease-in-out block"
+                                        id="slide-0">
+                                        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                                            <span
+                                                class="text-[9px] font-extrabold uppercase text-[#00a3e0] tracking-wider">Sampling
+                                                Outlook</span>
+                                            <span class="text-[9px] font-bold text-slate-400">EST. 2026</span>
+                                        </div>
+                                        <h4 class="text-sm font-extrabold text-white">Distribusi Sampling &amp; FPC</h4>
+                                        <p class="text-[11px] text-slate-300 font-light leading-relaxed">
+                                            Penerapan Finite Population Correction (FPC) pada populasi terbatas untuk
+                                            menekan standar error estimasi.
+                                        </p>
+                                    </div>
+
+                                    <!-- Card Slide 2 (Gaussian Distribution) -->
+                                    <div class="carousel-slide space-y-2 transition-opacity duration-500 ease-in-out hidden"
+                                        id="slide-1">
+                                        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                                            <span
+                                                class="text-[9px] font-extrabold uppercase text-[#00a3e0] tracking-wider">Gaussian
+                                                Outlook</span>
+                                            <span class="text-[9px] font-bold text-slate-400">EST. 2025</span>
+                                        </div>
+                                        <h4 class="text-sm font-extrabold text-white">Aproksimasi Kurva Normal</h4>
+                                        <p class="text-[11px] text-slate-300 font-light leading-relaxed">
+                                            Visualisasi distribusi kontinu z-score dan daerah probabilitas di bawah
+                                            kurva
+                                            normal secara interaktif.
+                                        </p>
+                                    </div>
+
+                                    <!-- Card Slide 3 (Regression & Trend) -->
+                                    <div class="carousel-slide space-y-2 transition-opacity duration-500 ease-in-out hidden"
+                                        id="slide-2">
+                                        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                                            <span
+                                                class="text-[9px] font-extrabold uppercase text-[#00a3e0] tracking-wider">Linear
+                                                Regression</span>
+                                            <span class="text-[9px] font-bold text-slate-400">EST. 2024</span>
+                                        </div>
+                                        <h4 class="text-sm font-extrabold text-white">Tren Linear &amp; Estimasi
+                                            Residual
+                                        </h4>
+                                        <p class="text-[11px] text-slate-300 font-light leading-relaxed">
+                                            Pemodelan statistik linier dengan kalkulasi otomatis R-squared dan
+                                            visualisasi
+                                            garis regresi terbaik.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <!-- Slider Buttons (Next/Prev red & blue style) -->
+                                <div class="absolute -left-1 top-1/2 -translate-y-1/2">
+                                    <button onclick="prevHeroSlide()"
+                                        class="w-8 h-8 rounded-full bg-[#da291c] hover:bg-[#b51c14] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M15 19l-7-7 7-7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="absolute -right-1 top-1/2 -translate-y-1/2">
+                                    <button onclick="nextHeroSlide()"
+                                        class="w-8 h-8 rounded-full bg-[#00a3e0] hover:bg-[#0089bd] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+            </section>
+
+            <!-- Wrap the rest of the page in a max-w-7xl container to maintain alignment -->
+            <div class="w-full px-4 sm:px-8 lg:px-12 space-y-16 pb-12">
+
+                <!-- METODOLOGI & WORKFLOW -->
+                <section id="workflow" class="space-y-6 pt-6">
+                    <div class="border-l-4 border-brand-500 pl-4">
+                        <h3 class="text-2xl font-bold">Metodologi &amp; Alur Kerja</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Siklus pengolahan data mentah dari backend
+                            Python ke visualisasi web</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div
+                            class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-violet-500/10 dark:bg-violet-500/20 text-violet-600 dark:text-violet-400 flex items-center justify-center mb-4 font-bold text-xl">
+                                01
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">Python Processing</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Pembersihan dataset dasar, kalkulasi nilai parameter agregat statistik utama ($Mean$,
+                                $Standard\ Deviation$, $Z\text{-}Score$), serta pembentukan estimasi titik kurva
+                                teoritis
+                                presisi tinggi.
+                            </p>
+                        </div>
+
+                        <div
+                            class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4 font-bold text-xl">
+                                02
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">REST API Serving</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Konversi data internal ke struktur format JSON terstandar untuk dikirim dari FastAPI
+                                backend
+                                ke frontend klien secara cepat dengan latensi jaringan minimal.
+                            </p>
+                        </div>
+
+                        <div
+                            class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 font-bold text-xl">
+                                03
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">Interaktivitas Klien</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Merender visualisasi dengan Chart.js, menyediakan sistem paginasi tabel data asli yang
+                                responsif, serta mensimulasikan parameter distribusi secara dinamis.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- EXECUTIVE METRICS OVERVIEW -->
+                <section id="executive-metrics" class="space-y-6 pt-6">
+                    <div class="border-l-4 border-brand-500 pl-4">
+                        <h3 class="text-2xl font-bold">Ringkasan Eksekutif Metrik Kunci</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Parameter utama hasil sampling populasi
+                            terhitung</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
+                            <div class="space-y-1">
+                                <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Total
+                                    Populasi
+                                    Data</span>
+                                <h4 class="text-2xl font-extrabold text-glow">1.000</h4>
+                                <p class="text-xs text-green-500 flex items-center">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1"></span>
+                                    100% Terklasterisasi
+                                </p>
+                            </div>
+                            <div class="p-3 bg-brand-500/10 text-brand-500 rounded-xl">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                    </path>
                                 </svg>
                             </div>
-                            <div class="space-y-2 text-xs">
-                                <div class="flex justify-between">
-                                    <span class="text-slate-400">Total Populasi</span>
-                                    <span class="font-bold text-slate-700 dark:text-slate-200">1.000 Titik Data</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-slate-400">Aproksimasi Gaussian</span>
-                                    <span class="font-bold text-green-500">μ = 50.12 | σ = 10.05</span>
-                                </div>
+                        </div>
+
+                        <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
+                            <div class="space-y-1">
+                                <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Rata-rata (μ
+                                    /
+                                    Mean)</span>
+                                <h4 class="text-2xl font-extrabold text-glow">50.12</h4>
+                                <p class="text-xs text-slate-400">Target Ideal: 50.00</p>
                             </div>
-                            <button onclick="enterAppConsole()" class="w-full py-2.5 bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 rounded-xl text-xs font-bold text-brand-600 dark:text-brand-400 transition-colors">
-                                Luncurkan Simulasi Interaktif &rarr;
+                            <div class="p-3 bg-indigo-500/10 text-indigo-500 rounded-xl">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
+                            <div class="space-y-1">
+                                <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Simpangan
+                                    Baku
+                                    (σ)</span>
+                                <h4 class="text-2xl font-extrabold text-glow">10.05</h4>
+                                <p class="text-xs text-amber-500">Rentang Variansi Normal</p>
+                            </div>
+                            <div class="p-3 bg-purple-500/10 text-purple-500 rounded-xl">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
+                            <div class="space-y-1">
+                                <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Anomali
+                                    Terdeteksi</span>
+                                <h4 class="text-2xl font-extrabold text-glow">0.30%</h4>
+                                <p class="text-xs text-emerald-500">Sangat Rendah (Aman)</p>
+                            </div>
+                            <div class="p-3 bg-fuchsia-500/10 text-fuchsia-500 rounded-xl">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-4">
+                        <!-- Narasi Analitis -->
+                        <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4">
+                            <h4 class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3">
+                                Narasi
+                                Kesimpulan Eksperimen</h4>
+                            <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                                Berdasarkan pemrosesan data menggunakan metode statistik dalam Python, dataset sampel
+                                ini
+                                menunjukkan kecenderungan terdistribusi secara normal. Nilai rata-rata dari seluruh data
+                                berada pada angka <span
+                                    class="font-semibold text-brand-600 dark:text-brand-400">50.12</span>, yang
+                                mendekati
+                                parameter ideal rancangan eksperimen kita yaitu 50.
+                            </p>
+                            <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                                Dengan simpangan baku sebesar <span
+                                    class="font-semibold text-brand-600 dark:text-brand-400">10.05</span>, sebaran data
+                                mematuhi kaidah empiris (68-95-99.7). Anomali (outliers) di luar rentang $3\sigma$
+                                sangat
+                                minim, yaitu hanya di kisaran 0.30% saja, yang mengonfirmasi kestabilan proses penarikan
+                                sampel.
+                            </p>
+                        </div>
+
+                        <!-- CTA ke Konsol Utama -->
+                        <div
+                            class="glassmorphism glass-card rounded-2xl p-6 flex flex-col justify-between items-start space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Ingin Memeriksa Integritas Data Secara Langsung?</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                                    Anda dapat menguji hasil estimasi ini, menyortir tabel data asli secara dinamis,
+                                    mengonfigurasi ulang kurva distribusi, atau memeriksa log keluaran respons API di
+                                    dalam
+                                    konsol pengolahan data.
+                                </p>
+                            </div>
+                            <button onclick="enterAppConsole()"
+                                class="w-full sm:w-auto px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg shadow-brand-500/20 transition-all hover:scale-[1.02]">
+                                Masuk ke Ruang Kerja Konsol &rarr;
                             </button>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- METODOLOGI & WORKFLOW -->
-            <section id="workflow" class="space-y-6 pt-6">
-                <div class="border-l-4 border-brand-500 pl-4">
-                    <h3 class="text-2xl font-bold">Metodologi &amp; Alur Kerja</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Siklus pengolahan data mentah dari backend Python ke visualisasi web</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-violet-500/10 dark:bg-violet-500/20 text-violet-600 dark:text-violet-400 flex items-center justify-center mb-4 font-bold text-xl">
-                            01
-                        </div>
-                        <h4 class="font-bold text-lg mb-2">Python Processing</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            Pembersihan dataset dasar, kalkulasi nilai parameter agregat statistik utama ($Mean$, $Standard\ Deviation$, $Z\text{-}Score$), serta pembentukan estimasi titik kurva teoritis presisi tinggi.
-                        </p>
-                    </div>
-
-                    <div class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4 font-bold text-xl">
-                            02
-                        </div>
-                        <h4 class="font-bold text-lg mb-2">REST API Serving</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            Konversi data internal ke struktur format JSON terstandar untuk dikirim dari FastAPI backend ke frontend klien secara cepat dengan latensi jaringan minimal.
-                        </p>
-                    </div>
-
-                    <div class="glassmorphism glass-card rounded-2xl p-6 hover:translate-y-[-4px] transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 font-bold text-xl">
-                            03
-                        </div>
-                        <h4 class="font-bold text-lg mb-2">Interaktivitas Klien</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            Merender visualisasi dengan Chart.js, menyediakan sistem paginasi tabel data asli yang responsif, serta mensimulasikan parameter distribusi secara dinamis.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- EXECUTIVE METRICS OVERVIEW -->
-            <section id="executive-metrics" class="space-y-6 pt-6">
-                <div class="border-l-4 border-brand-500 pl-4">
-                    <h3 class="text-2xl font-bold">Ringkasan Eksekutif Metrik Kunci</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Parameter utama hasil sampling populasi terhitung</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
-                        <div class="space-y-1">
-                            <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Total Populasi Data</span>
-                            <h4 class="text-2xl font-extrabold text-glow">1.000</h4>
-                            <p class="text-xs text-green-500 flex items-center">
-                                <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1"></span>
-                                100% Terklasterisasi
+                <!-- SECTION ABOUT ME & CONTACT US -->
+                <section id="about-me"
+                    class="font-nova w-full py-16 border-t border-slate-200/20 dark:border-slate-800/20 bg-slate-50/50 dark:bg-slate-900/10">
+                    <div class="w-full px-4 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <!-- About Me Card -->
+                        <div class="glassmorphism glass-card rounded-3xl p-8 space-y-6 relative overflow-hidden">
+                            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-500/10 rounded-full blur-3xl">
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-2xl shadow-lg shadow-brand-500/20">
+                                    DA
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Mohamad Ghifari
+                                    </h3>
+                                    <p class="text-xs text-brand-500 font-semibold">Data Analyst &amp; Quantitative
+                                        Researcher</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Spesialis dalam analisis data kuantitatif, pemodelan statistik, dan simulasi penarikan
+                                sampel menggunakan ekosistem Python (Pandas, NumPy, Matplotlib, Seaborn). Berfokus pada
+                                perancangan metodologi data empiris untuk menghasilkan wawasan bisnis yang presisi,
+                                representatif, dan bebas bias.
                             </p>
                         </div>
-                        <div class="p-3 bg-brand-500/10 text-brand-500 rounded-xl">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        </div>
-                    </div>
 
-                    <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
-                        <div class="space-y-1">
-                            <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Rata-rata (μ / Mean)</span>
-                            <h4 class="text-2xl font-extrabold text-glow">50.12</h4>
-                            <p class="text-xs text-slate-400">Target Ideal: 50.00</p>
-                        </div>
-                        <div class="p-3 bg-indigo-500/10 text-indigo-500 rounded-xl">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        <!-- Contact Us Card -->
+                        <div id="contact-us"
+                            class="glassmorphism glass-card rounded-3xl p-8 space-y-6 relative overflow-hidden">
+                            <div class="absolute -left-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl">
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Hubungi Saya (Contact
+                                    Us)</h3>
+                                <p class="text-xs text-slate-500">Mari berdiskusi tentang analisis data dan riset
+                                    statistik Anda.</p>
+                            </div>
+                            <div class="space-y-3">
+                                <a href="mailto:mohgh@example.com"
+                                    class="flex items-center space-x-3 text-xs hover:text-brand-500 transition-colors p-2 rounded-xl bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/10">
+                                    <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    <span
+                                        class="font-medium text-slate-700 dark:text-slate-300">mohgh@example.com</span>
+                                </a>
+                                <div
+                                    class="flex items-center space-x-3 text-xs p-2 rounded-xl bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/10">
+                                    <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    <span class="font-medium text-slate-700 dark:text-slate-300">Bandung, Jawa Barat,
+                                        Indonesia</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
-                        <div class="space-y-1">
-                            <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Simpangan Baku (σ)</span>
-                            <h4 class="text-2xl font-extrabold text-glow">10.05</h4>
-                            <p class="text-xs text-amber-500">Rentang Variansi Normal</p>
-                        </div>
-                        <div class="p-3 bg-purple-500/10 text-purple-500 rounded-xl">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
-                        </div>
-                    </div>
-
-                    <div class="glassmorphism glass-card rounded-2xl p-6 flex items-center justify-between">
-                        <div class="space-y-1">
-                            <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Anomali Terdeteksi</span>
-                            <h4 class="text-2xl font-extrabold text-glow">0.30%</h4>
-                            <p class="text-xs text-emerald-500">Sangat Rendah (Aman)</p>
-                        </div>
-                        <div class="p-3 bg-fuchsia-500/10 text-fuchsia-500 rounded-xl">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-4">
-                    <!-- Narasi Analitis -->
-                    <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4">
-                        <h4 class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3">Narasi Kesimpulan Eksperimen</h4>
-                        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                            Berdasarkan pemrosesan data menggunakan metode statistik dalam Python, dataset sampel ini menunjukkan kecenderungan terdistribusi secara normal. Nilai rata-rata dari seluruh data berada pada angka <span class="font-semibold text-brand-600 dark:text-brand-400">50.12</span>, yang mendekati parameter ideal rancangan eksperimen kita yaitu 50.
-                        </p>
-                        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                            Dengan simpangan baku sebesar <span class="font-semibold text-brand-600 dark:text-brand-400">10.05</span>, sebaran data mematuhi kaidah empiris (68-95-99.7). Anomali (outliers) di luar rentang $3\sigma$ sangat minim, yaitu hanya di kisaran 0.30% saja, yang mengonfirmasi kestabilan proses penarikan sampel.
-                        </p>
-                    </div>
-
-                    <!-- CTA ke Konsol Utama -->
-                    <div class="glassmorphism glass-card rounded-2xl p-6 flex flex-col justify-between items-start space-y-4">
-                        <div>
-                            <h4 class="font-bold text-lg mb-2">Ingin Memeriksa Integritas Data Secara Langsung?</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                                Anda dapat menguji hasil estimasi ini, menyortir tabel data asli secara dinamis, mengonfigurasi ulang kurva distribusi, atau memeriksa log keluaran respons API di dalam konsol pengolahan data.
-                            </p>
-                        </div>
-                        <button onclick="enterAppConsole()" class="w-full sm:w-auto px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg shadow-brand-500/20 transition-all hover:scale-[1.02]">
-                            Masuk ke Ruang Kerja Konsol &rarr;
-                        </button>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </main>
 
         <!-- FOOTER LANDING PAGE -->
         <footer class="glassmorphism border-t mt-16 py-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div
+                class="w-full px-4 sm:px-8 lg:px-12 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p class="text-xs text-slate-500">
                     &copy; 2026 PyAnalytics Studio. Dibuat sebagai Portofolio Analisis Terintegrasi Python.
                 </p>
@@ -295,7 +558,8 @@
                     <span>&bull;</span>
                     <a href="#workflow" class="hover:text-brand-500 transition-colors">Metodologi</a>
                     <span>&bull;</span>
-                    <button onclick="enterAppConsole()" class="hover:text-brand-500 transition-colors font-bold">Buka Konsol</button>
+                    <button onclick="enterAppConsole()" class="hover:text-brand-500 transition-colors font-bold">Buka
+                        Konsol</button>
                 </div>
             </div>
         </footer>
@@ -304,47 +568,71 @@
 
     <!-- ================= VIEW 2: APP CONSOLE WORKSPACE ================= -->
     <div id="view-app-workspace" class="hidden flex flex-col min-h-screen transition-all duration-500">
-        
+
         <!-- HEADER KONSOL OPERASIONAL -->
         <header class="sticky top-0 z-40 w-full glassmorphism border-b transition-all duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="w-full px-4 sm:px-8 lg:px-12">
                 <div class="flex items-center justify-between h-16">
                     <!-- Logo & Button Back to Landing -->
                     <div class="flex items-center space-x-3">
-                        <button onclick="leaveAppConsole()" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 rounded-xl text-xs font-bold transition-all hover:translate-x-[-2px]">
+                        <button onclick="leaveAppConsole()"
+                            class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 rounded-xl text-xs font-bold transition-all hover:translate-x-[-2px]">
                             <span>&larr;</span>
                             <span>Halaman Depan</span>
                         </button>
                         <span class="text-slate-400 dark:text-slate-600">|</span>
-                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">App Workspace</span>
+                        <span class="text-sm font-bold text-brand-600 dark:text-brand-400">Daily Revenue analysis</span>
                     </div>
 
                     <!-- Tab Navigasi Khusus Internal Konsol -->
-                    <nav class="hidden md:flex space-x-1 bg-slate-200/30 dark:bg-slate-900/30 p-1 rounded-xl border border-slate-300/10">
-                        <button onclick="switchTab('data-table')" id="nav-data-table" class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
+                    <nav
+                        class="hidden md:flex space-x-1 bg-slate-200/30 dark:bg-slate-900/30 p-1 rounded-xl border border-slate-300/10">
+                        <button onclick="switchTab('data-table')" id="nav-data-table"
+                            class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
                             Tabel Data Asli
                         </button>
-                        <button onclick="switchTab('visualization')" id="nav-visualization" class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
+                        <button onclick="switchTab('visualization')" id="nav-visualization"
+                            class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
                             Visualisasi Kurva
                         </button>
-                        <button onclick="switchTab('api-doc')" id="nav-api-doc" class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
-                            Integrasi Python (API)
+                        <button onclick="switchTab('api-doc')" id="nav-api-doc"
+                            class="nav-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">
+                            Diagnosa Data Sampling
+                        </button>
+                        <button onclick="openPythonSourceModal()"
+                            class="px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100 flex items-center space-x-1 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
+                            <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            <span>Sumber Python &amp; Gambar</span>
                         </button>
                     </nav>
 
                     <div class="flex items-center space-x-3">
-                        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/50 dark:hover:bg-slate-800/80 border border-slate-300/30 dark:border-slate-700/30 transition-all text-slate-700 dark:text-slate-300" title="Ubah Tema">
-                            <svg id="sun-icon-workspace" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+                        <button onclick="toggleTheme()"
+                            class="p-2 rounded-xl bg-slate-200/50 hover:bg-slate-200/80 dark:bg-slate-800/50 dark:hover:bg-slate-800/80 border border-slate-300/30 dark:border-slate-700/30 transition-all text-slate-700 dark:text-slate-300"
+                            title="Ubah Tema">
+                            <svg id="sun-icon-workspace" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z">
+                                </path>
                             </svg>
-                            <svg id="moon-icon-workspace" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            <svg id="moon-icon-workspace" class="w-5 h-5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                </path>
                             </svg>
                         </button>
 
-                        <button onclick="toggleMobileMenuWorkspace()" class="md:hidden p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300">
+                        <button onclick="toggleMobileMenuWorkspace()"
+                            class="md:hidden p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16m-7 6h7"></path>
                             </svg>
                         </button>
                     </div>
@@ -353,48 +641,73 @@
 
             <!-- Menu Mobile Konsol -->
             <div id="mobile-menu-workspace" class="hidden md:hidden px-4 pt-2 pb-4 space-y-1 glassmorphism border-t">
-                <button onclick="switchTab('data-table'); toggleMobileMenuWorkspace();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
+                <button onclick="switchTab('data-table'); toggleMobileMenuWorkspace();"
+                    class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
                     Tabel Data Asli
                 </button>
-                <button onclick="switchTab('visualization'); toggleMobileMenuWorkspace();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
+                <button onclick="switchTab('visualization'); toggleMobileMenuWorkspace();"
+                    class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
                     Visualisasi Kurva
                 </button>
-                <button onclick="switchTab('api-doc'); toggleMobileMenuWorkspace();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
-                    Integrasi Python (API)
+                <button onclick="switchTab('api-doc'); toggleMobileMenuWorkspace();"
+                    class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50">
+                    Diagnosa data sampling
+                </button>
+                <button onclick="openPythonSourceModal(); toggleMobileMenuWorkspace();"
+                    class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-brand-650 dark:text-brand-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 flex items-center space-x-1.5 font-bold">
+                    <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                    <span>Sumber Python &amp; Gambar</span>
                 </button>
             </div>
         </header>
 
         <!-- AREA UTAMA KONSOL -->
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+        <main class="w-full px-4 sm:px-8 lg:px-12 py-8 flex-1">
 
             <!-- ================= TAB: DATA TABLE ================= -->
             <section id="tab-data-table" class="tab-content space-y-6 hidden">
                 <div class="border-l-4 border-brand-500 pl-4">
-                    <h3 class="text-2xl font-bold">Modul Tabel Data Asli</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Dataset mentah berisikan data sampel sebelum klasterisasi lanjut</p>
+                    <h3 class="text-2xl font-bold">Tabel dari data statsitik</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Tabel ini berisikan data sampel yang
+                        digunakan untuk analisis data dengan metode simlpe random sampling dan strata simple random
+                        sampling unduh data kami yang telah kami sediakan <br> Difitur yang sudah kami sediakan</p>
                 </div>
-
                 <div class="glassmorphism glass-card rounded-2xl p-4 sm:p-6 space-y-4">
                     <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
                         <div class="relative w-full sm:w-80">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <span
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
                             </span>
-                            <input type="text" id="table-search" oninput="handleTableSearch()" placeholder="Cari ID Sampel atau Kategori..." class="w-full pl-10 pr-4 py-2 text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-900 dark:text-slate-100">
+                            <input type="text" id="table-search" oninput="handleTableSearch()"
+                                placeholder="Cari Tanggal, Pendapatan..."
+                                class="w-full pl-10 pr-4 py-2 text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-900 dark:text-slate-100">
                         </div>
 
                         <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
-                            <select id="table-page-size" onchange="handlePageSizeChange()" class="text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <select id="table-page-size" onchange="handlePageSizeChange()"
+                                class="text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">
                                 <option value="10">10 baris / hal</option>
                                 <option value="25" selected>25 baris / hal</option>
                                 <option value="50">50 baris / hal</option>
                                 <option value="100">100 baris / hal</option>
                             </select>
-                            <button onclick="downloadCSV()" class="px-4 py-2 bg-brand-500/10 hover:bg-brand-500/20 text-brand-600 dark:text-brand-400 border border-brand-500/20 rounded-xl text-xs font-bold transition-all flex items-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                Ekspor CSV
-                            </button>
+                            <select onchange="handleExportSelect(this)"
+                                class="px-4 py-2 bg-brand-500/10 hover:bg-brand-500/20 text-brand-600 dark:text-brand-400 border border-brand-500/20 rounded-xl text-xs font-bold transition-all focus:outline-none cursor-pointer">
+                                <option value="" disabled selected hidden>Unduh / Sumber Data</option>
+                                <option value="current"
+                                    class="text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 font-semibold">
+                                    Data Asli Saya (Sekarang)</option>
+                                <option value="kaggle"
+                                    class="text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 font-semibold">
+                                    Kaggle: E-commerce Data</option>
+                            </select>
                         </div>
                     </div>
 
@@ -402,56 +715,57 @@
                         <table class="min-w-full divide-y divide-slate-200/30 dark:divide-slate-700/30">
                             <thead class="bg-slate-200/20 dark:bg-slate-800/20">
                                 <tr>
-                                    <th scope="col" onclick="sortTable('id')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                    <th scope="col"
+                                        class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                        No.
+                                    </th>
+                                    <th scope="col" onclick="sortTable('Tanggal')"
+                                        class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
                                         <div class="flex items-center space-x-1">
-                                            <span>Sample ID</span>
-                                            <span id="sort-indicator-id" class="text-slate-400">↕</span>
+                                            <span>Tanggal</span>
+                                            <span id="sort-indicator-Tanggal" class="text-slate-400">↕</span>
                                         </div>
                                     </th>
-                                    <th scope="col" onclick="sortTable('timestamp')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                    <th scope="col" onclick="sortTable('TotalHarga')"
+                                        class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
                                         <div class="flex items-center space-x-1">
-                                            <span>Waktu</span>
-                                            <span id="sort-indicator-timestamp" class="text-slate-400">↕</span>
+                                            <span>Total Pendapatan (Daily Revenue)</span>
+                                            <span id="sort-indicator-TotalHarga" class="text-slate-400">↕</span>
                                         </div>
                                     </th>
-                                    <th scope="col" onclick="sortTable('value')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
+                                    <th scope="col" onclick="sortTable('JumlahTransaksi')"
+                                        class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
                                         <div class="flex items-center space-x-1">
-                                            <span>Nilai Mentah (X)</span>
-                                            <span id="sort-indicator-value" class="text-slate-400">↕</span>
-                                        </div>
-                                    </th>
-                                    <th scope="col" onclick="sortTable('zScore')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
-                                        <div class="flex items-center space-x-1">
-                                            <span>Z-Score (Python Calc)</span>
-                                            <span id="sort-indicator-zScore" class="text-slate-400">↕</span>
-                                        </div>
-                                    </th>
-                                    <th scope="col" onclick="sortTable('category')" class="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 select-none">
-                                        <div class="flex items-center space-x-1">
-                                            <span>Klasifikasi</span>
-                                            <span id="sort-indicator-category" class="text-slate-400">↕</span>
+                                            <span>Jumlah Transaksi</span>
+                                            <span id="sort-indicator-JumlahTransaksi" class="text-slate-400">↕</span>
                                         </div>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody id="table-body" class="divide-y divide-slate-200/20 dark:divide-slate-700/20 text-xs">
+                            <tbody id="table-body"
+                                class="divide-y divide-slate-200/20 dark:divide-slate-700/20 text-xs">
                                 <!-- Baris diisi oleh JS -->
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-300/20 dark:border-slate-700/20">
+                    <div
+                        class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-300/20 dark:border-slate-700/20">
                         <span class="text-xs text-slate-500" id="table-stats-text">
                             Menampilkan 1-25 dari 1.000 data
                         </span>
                         <div class="flex items-center space-x-2">
-                            <button onclick="prevPage()" class="p-2 bg-slate-200/30 dark:bg-slate-800/30 border border-slate-300/30 dark:border-slate-700/30 rounded-xl hover:bg-slate-200/60 dark:hover:bg-slate-800/60 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" id="btn-prev-page">
+                            <button onclick="prevPage()"
+                                class="p-2 bg-slate-200/30 dark:bg-slate-800/30 border border-slate-300/30 dark:border-slate-700/30 rounded-xl hover:bg-slate-200/60 dark:hover:bg-slate-800/60 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                                id="btn-prev-page">
                                 Sebelumnya
                             </button>
                             <div class="flex items-center space-x-1" id="pagination-pages">
                                 <!-- Nomor halaman dinamis -->
                             </div>
-                            <button onclick="nextPage()" class="p-2 bg-slate-200/30 dark:bg-slate-800/30 border border-slate-300/30 dark:border-slate-700/30 rounded-xl hover:bg-slate-200/60 dark:hover:bg-slate-800/60 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" id="btn-next-page">
+                            <button onclick="nextPage()"
+                                class="p-2 bg-slate-200/30 dark:bg-slate-800/30 border border-slate-300/30 dark:border-slate-700/30 rounded-xl hover:bg-slate-200/60 dark:hover:bg-slate-800/60 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                                id="btn-next-page">
                                 Berikutnya
                             </button>
                         </div>
@@ -463,92 +777,248 @@
             <section id="tab-visualization" class="tab-content space-y-6 hidden">
                 <div class="border-l-4 border-brand-500 pl-4">
                     <h3 class="text-2xl font-bold">Modul Visualisasi Kurva Sampling</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Merender visualisasi kurva interaktif berdasarkan estimasi koordinat backend</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Merender visualisasi kurva interaktif
+                        berdasarkan estimasi koordinat backend</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- PANEL KONTROL PARAMETER (Simulasi Parameter Python) -->
                     <div class="glassmorphism glass-card rounded-2xl p-6 space-y-6">
-                        <h4 class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3">Parameter Distribusi</h4>
-                        
+                        <h4 class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3">
+                            Panel Kontrol &amp; Ringkasan</h4>
+
+                        <!-- Mode Selector -->
                         <div class="space-y-2">
-                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Model Kurva / Distribusi</label>
-                            <select id="param-dist-model" onchange="handleModelChange()" class="w-full text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
-                                <option value="normal">Distribusi Normal Gaussian</option>
-                                <option value="trend">Trend Line dengan Noise Acak</option>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Sumber
+                                Data / Mode</label>
+                            <select id="visualization-mode" onchange="handleModeToggle()"
+                                class="w-full text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 font-bold text-brand-600 dark:text-brand-400">
+                                <option value="real" selected>Data Riil (Sampling Excel)</option>
+                                <option value="simulation">Simulasi Teoretis (Kurva Gaussian)</option>
                             </select>
                         </div>
 
-                        <!-- Parameter 1 (Rata-rata / Mean) -->
-                        <div class="space-y-2" id="wrapper-param-mean">
-                            <div class="flex justify-between items-center">
-                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Rata-rata (Mean / μ)</label>
-                                <span class="text-sm font-bold text-brand-600 dark:text-brand-400" id="label-mean">50</span>
-                            </div>
-                            <input type="range" id="param-mean" min="10" max="90" step="1" value="50" oninput="updateParamValue('mean', this.value)" class="w-full accent-brand-500">
-                            <div class="flex justify-between text-[10px] text-slate-400">
-                                <span>Min: 10</span>
-                                <span>Maks: 90</span>
+                        <!-- Filter Perbandingan (Hanya muncul jika mode = real) -->
+                        <div id="wrapper-real-comparison" class="space-y-2">
+                            <label
+                                class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Perbandingan
+                                Kurva</label>
+                            <select id="real-comparison-select" onchange="updateChartData()"
+                                class="w-full text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 font-bold text-slate-800 dark:text-slate-200">
+                                <option value="all" selected>Tampilkan Semua (3 Kurva)</option>
+                                <option value="srs">Populasi vs Simple Random (SRS)</option>
+                                <option value="stratified">Populasi vs Stratified Random</option>
+                            </select>
+                        </div>
+
+                        <!-- PANEL METRIK REAL DATA -->
+                        <div id="real-data-summary-panel" class="space-y-4">
+                            <div class="border-t border-slate-300/30 dark:border-slate-700/30 pt-4">
+                                <h5 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">output hasil
+                                    sampling</h5>
+                                <div class="space-y-3">
+                                    <!-- Populasi -->
+                                    <div id="real-metric-population"
+                                        class="bg-blue-500/5 dark:bg-blue-500/10 border border-blue-500/20 rounded-xl p-3 space-y-1">
+                                        <div
+                                            class="flex justify-between items-center text-xs font-bold text-blue-600 dark:text-blue-400">
+                                            <span>Populasi (Sensus)</span>
+                                            <span>N = 304</span>
+                                        </div>
+                                        <div
+                                            class="grid grid-cols-2 gap-2 text-[10px] text-slate-500 dark:text-slate-400">
+                                            <div>Mean: <strong
+                                                    class="text-slate-850 dark:text-slate-200">32.070</strong></div>
+                                            <div>SD: <strong class="text-slate-850 dark:text-slate-200">17.336</strong>
+                                            </div>
+                                            <div>Min: <strong class="text-slate-850 dark:text-slate-200">3.457</strong>
+                                            </div>
+                                            <div>Max: <strong
+                                                    class="text-slate-850 dark:text-slate-200">112.141</strong></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- SRS -->
+                                    <div id="real-metric-srs"
+                                        class="bg-red-500/5 dark:bg-red-500/10 border border-red-500/20 rounded-xl p-3 space-y-1">
+                                        <div
+                                            class="flex justify-between items-center text-xs font-bold text-red-600 dark:text-red-400">
+                                            <span>Simple Random (SRS)</span>
+                                            <span>n = 61</span>
+                                        </div>
+                                        <div
+                                            class="grid grid-cols-2 gap-2 text-[10px] text-slate-500 dark:text-slate-400">
+                                            <div>Mean: <strong
+                                                    class="text-slate-850 dark:text-slate-200">31.318</strong></div>
+                                            <div>SD: <strong class="text-slate-850 dark:text-slate-200">16.910</strong>
+                                            </div>
+                                            <div>SE: <strong class="text-slate-850 dark:text-slate-200">1.935</strong>
+                                            </div>
+                                            <div>Max: <strong class="text-slate-850 dark:text-slate-200">75.244</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Stratified -->
+                                    <div id="real-metric-stratified"
+                                        class="bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 space-y-1">
+                                        <div
+                                            class="flex justify-between items-center text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                            <span>Stratified (Strata Hari)</span>
+                                            <span>n = 60</span>
+                                        </div>
+                                        <div
+                                            class="grid grid-cols-2 gap-2 text-[10px] text-slate-500 dark:text-slate-400">
+                                            <div>Mean: <strong
+                                                    class="text-slate-850 dark:text-slate-200">31.456</strong></div>
+                                            <div>SD: <strong class="text-slate-850 dark:text-slate-200">19.032</strong>
+                                            </div>
+                                            <div>SE: <strong class="text-slate-850 dark:text-slate-200">2.226</strong>
+                                            </div>
+                                            <div>Max: <strong
+                                                    class="text-slate-850 dark:text-slate-200">112.141</strong></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Perbandingan -->
+                                    <div id="real-metric-comparison"
+                                        class="bg-purple-500/5 dark:bg-purple-500/10 border border-purple-500/20 rounded-xl p-3 space-y-1">
+                                        <div
+                                            class="flex justify-between items-center text-xs font-bold text-purple-600 dark:text-purple-400">
+                                            <span>Perbandingan Estimasi</span>
+                                            <span
+                                                class="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/10 dark:bg-purple-500/20">SRS
+                                                vs Stratified</span>
+                                        </div>
+                                        <div
+                                            class="text-[10px] text-slate-500 dark:text-slate-400 space-y-1 pt-1 leading-relaxed">
+                                            <div>• Selisih Mean SRS vs Populasi: <strong
+                                                    class="text-red-500 dark:text-red-400">2.34%</strong> (SE: 1.935)
+                                            </div>
+                                            <div>• Selisih Mean Strata vs Populasi: <strong
+                                                    class="text-emerald-500 dark:text-emerald-400">1.91%</strong> (SE:
+                                                2.226)</div>
+                                            <div
+                                                class="border-t border-slate-300/30 dark:border-slate-700/30 pt-1.5 mt-1.5 text-slate-600 dark:text-slate-300 font-medium">
+                                                Metode <span
+                                                    class="text-emerald-600 dark:text-emerald-400 font-bold">Stratified
+                                                    Random (Strata Hari)</span> memberikan presisi yang lebih tinggi
+                                                dengan selisih rata-rata terkecil dibanding parameter Populasi.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Parameter 2 (Simpangan Baku / Deviasi) -->
-                        <div class="space-y-2" id="wrapper-param-std">
-                            <div class="flex justify-between items-center">
-                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Simpangan Baku (σ)</label>
-                                <span class="text-sm font-bold text-brand-600 dark:text-brand-400" id="label-std">10</span>
+                        <!-- PANEL KONTROL SIMULASI TEORETIS -->
+                        <div id="simulation-controls-panel" class="space-y-6 hidden">
+                            <div class="space-y-2">
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Model
+                                    Kurva / Distribusi</label>
+                                <select id="param-dist-model" onchange="handleModelChange()"
+                                    class="w-full text-sm bg-slate-200/50 dark:bg-slate-900/50 border border-slate-300/50 dark:border-slate-700/50 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    <option value="normal">Distribusi Normal Gaussian</option>
+                                    <option value="trend">Trend Line dengan Noise Acak</option>
+                                </select>
                             </div>
-                            <input type="range" id="param-std" min="2" max="25" step="0.5" value="10" oninput="updateParamValue('std', this.value)" class="w-full accent-brand-500">
-                            <div class="flex justify-between text-[10px] text-slate-400">
-                                <span>Min: 2</span>
-                                <span>Maks: 25</span>
-                            </div>
-                        </div>
 
-                        <!-- Parameter 3 (Jumlah Sampel / N) -->
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Ukuran Sampel (N)</label>
-                                <span class="text-sm font-bold text-brand-600 dark:text-brand-400" id="label-n">1000</span>
+                            <!-- Parameter 1 (Rata-rata / Mean) -->
+                            <div class="space-y-2" id="wrapper-param-mean">
+                                <div class="flex justify-between items-center">
+                                    <label
+                                        class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Rata-rata
+                                        (Mean / μ)</label>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400"
+                                        id="label-mean">50</span>
+                                </div>
+                                <input type="range" id="param-mean" min="10" max="90" step="1" value="50"
+                                    oninput="updateParamValue('mean', this.value)" class="w-full accent-brand-500">
+                                <div class="flex justify-between text-[10px] text-slate-400">
+                                    <span>Min: 10</span>
+                                    <span>Maks: 90</span>
+                                </div>
                             </div>
-                            <input type="range" id="param-n" min="100" max="2000" step="100" value="1000" oninput="updateParamValue('n', this.value)" class="w-full accent-brand-500">
-                            <div class="flex justify-between text-[10px] text-slate-400">
-                                <span>100</span>
-                                <span>2.000</span>
-                            </div>
-                        </div>
 
-                        <!-- Parameter Khusus Noise (Untuk model Tren) -->
-                        <div class="space-y-2 hidden" id="wrapper-param-noise">
-                            <div class="flex justify-between items-center">
-                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Noise Multiplier</label>
-                                <span class="text-sm font-bold text-brand-600 dark:text-brand-400" id="label-noise">5</span>
+                            <!-- Parameter 2 (Simpangan Baku / Deviasi) -->
+                            <div class="space-y-2" id="wrapper-param-std">
+                                <div class="flex justify-between items-center">
+                                    <label
+                                        class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Simpangan
+                                        Baku (σ)</label>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400"
+                                        id="label-std">10</span>
+                                </div>
+                                <input type="range" id="param-std" min="2" max="25" step="0.5" value="10"
+                                    oninput="updateParamValue('std', this.value)" class="w-full accent-brand-500">
+                                <div class="flex justify-between text-[10px] text-slate-400">
+                                    <span>Min: 2</span>
+                                    <span>Maks: 25</span>
+                                </div>
                             </div>
-                            <input type="range" id="param-noise" min="0" max="20" step="1" value="5" oninput="updateParamValue('noise', this.value)" class="w-full accent-brand-500">
-                            <div class="flex justify-between text-[10px] text-slate-400">
-                                <span>Min: 0 (Murni)</span>
-                                <span>Maks: 20 (Sangat Acak)</span>
-                            </div>
-                        </div>
 
-                        <div class="pt-2 border-t border-slate-300/30 dark:border-slate-700/30">
-                            <button onclick="runPythonSimulation()" class="w-full py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-lg transition-all flex items-center justify-center text-sm">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                                Run Python Calc
-                            </button>
-                            <p class="text-[11px] text-slate-500 text-center mt-2">Menghitung ulang koordinat kurva secara matematis presisi.</p>
+                            <!-- Parameter 3 (Jumlah Sampel / N) -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Ukuran
+                                        Sampel (N)</label>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400"
+                                        id="label-n">1000</span>
+                                </div>
+                                <input type="range" id="param-n" min="100" max="2000" step="100" value="1000"
+                                    oninput="updateParamValue('n', this.value)" class="w-full accent-brand-500">
+                                <div class="flex justify-between text-[10px] text-slate-400">
+                                    <span>100</span>
+                                    <span>2.000</span>
+                                </div>
+                            </div>
+
+                            <!-- Parameter Khusus Noise (Untuk model Tren) -->
+                            <div class="space-y-2 hidden" id="wrapper-param-noise">
+                                <div class="flex justify-between items-center">
+                                    <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Noise
+                                        Multiplier</label>
+                                    <span class="text-sm font-bold text-brand-600 dark:text-brand-400"
+                                        id="label-noise">5</span>
+                                </div>
+                                <input type="range" id="param-noise" min="0" max="20" step="1" value="5"
+                                    oninput="updateParamValue('noise', this.value)" class="w-full accent-brand-500">
+                                <div class="flex justify-between text-[10px] text-slate-400">
+                                    <span>Min: 0 (Murni)</span>
+                                    <span>Maks: 20 (Sangat Acak)</span>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 border-t border-slate-300/30 dark:border-slate-700/30">
+                                <button onclick="runPythonSimulation()"
+                                    class="w-full py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-lg transition-all flex items-center justify-center text-sm">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                        </path>
+                                    </svg>
+                                    Run Python Calc
+                                </button>
+                                <p class="text-[11px] text-slate-500 text-center mt-2">Menghitung ulang koordinat kurva
+                                    secara teoritis.</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- PANEL GRAFIK INTERAKTIF -->
                     <div class="lg:col-span-2 flex flex-col justify-between space-y-4">
                         <div class="glassmorphism glass-card rounded-2xl p-4 sm:p-6 flex-1 flex flex-col min-h-[400px]">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-4 border-b border-slate-300/30 dark:border-slate-700/30">
+                            <div
+                                class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 pb-4 border-b border-slate-300/30 dark:border-slate-700/30">
                                 <div>
-                                    <h4 class="font-bold text-lg" id="chart-title">Visualisasi Distribusi Kerapatan Peluang (PDF)</h4>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400">Arahkan kursor ke garis kurva untuk melihat rincian koordinat</p>
+                                    <h4 class="font-bold text-lg" id="chart-title">Visualisasi Distribusi Kerapatan
+                                        Peluang (PDF)</h4>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">Arahkan kursor ke garis kurva
+                                        untuk melihat rincian koordinat</p>
                                 </div>
-                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300" id="chart-indicator-type">
+                                <span
+                                    class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300"
+                                    id="chart-indicator-type">
                                     Gauss Normal
                                 </span>
                             </div>
@@ -558,118 +1028,374 @@
                             </div>
                         </div>
 
-                        <div class="glassmorphism glass-card rounded-2xl p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <h5 class="text-xs font-bold text-slate-400 uppercase">Interpretasi Z-Score Terpilih</h5>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                                    Berdasarkan Aturan 3-Sigma: <br>
-                                    • ±1σ mencakup <strong>68.27%</strong> data.<br>
-                                    • ±2σ mencakup <strong>95.45%</strong> data.<br>
-                                    • ±3σ mencakup <strong>99.73%</strong> data sampel.
-                                </p>
+                        <!-- PANEL TABEL OUTPUT HASIL SAMPLING (Tampil di bagian bawah) -->
+                        <div id="sampling-table-panel" class="glassmorphism glass-card rounded-2xl p-6 mt-6 space-y-4">
+                            <div
+                                class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-slate-300/30 dark:border-slate-700/30">
+                                <div>
+                                    <h4 class="font-bold text-lg">Tabel Output Hasil Sampling</h4>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">Menampilkan daftar baris data
+                                        yang
+                                        terpilih dari populasi berdasarkan metode terpilih</p>
+                                </div>
+
+                                <!-- Toggle SRS vs Stratified -->
+                                <div
+                                    class="flex bg-slate-200/50 dark:bg-slate-900/50 p-1 rounded-xl border border-slate-300/10">
+                                    <button onclick="switchSamplingMethod('srs')" id="btn-sampling-srs"
+                                        class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-sm">
+                                        Simple Random (SRS)
+                                    </button>
+                                    <button onclick="switchSamplingMethod('stratified')" id="btn-sampling-stratified"
+                                        class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 font-normal">
+                                        Stratified Random
+                                    </button>
+                                </div>
                             </div>
-                            <div class="space-y-1">
-                                <h5 class="text-xs font-bold text-slate-400 uppercase">Fungsi Densitas Peluang (PDF Formula)</h5>
-                                <p class="text-xs font-mono text-slate-600 dark:text-slate-300 py-1 bg-slate-200/40 dark:bg-slate-900/40 rounded-lg text-center">
-                                    f(x) = [1 / (σ √(2π))] * e^(-0.5 * ((x-μ)/σ)²)
-                                </p>
+
+                            <!-- Search & Pagination for Sampling Table -->
+                            <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                                <div class="relative w-full sm:max-w-xs">
+                                    <span
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                    </span>
+                                    <input type="text" id="sampling-search" oninput="handleSamplingSearch()"
+                                        placeholder="Cari tanggal atau hari..."
+                                        class="pl-9 pr-4 py-2 w-full text-xs bg-slate-200/30 dark:bg-slate-900/30 border border-slate-300/30 dark:border-slate-700/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                                <div class="text-xs text-slate-500">
+                                    Menampilkan <span id="sampling-info-count"
+                                        class="font-bold text-slate-800 dark:text-slate-200">0</span> data dari total
+                                    <span id="sampling-info-total"
+                                        class="font-bold text-slate-800 dark:text-slate-200">0</span>
+                                </div>
+                            </div>
+
+                            <!-- Responsive Table Container -->
+                            <div class="overflow-x-auto border border-slate-300/30 dark:border-slate-700/30 rounded-xl">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr
+                                            class="bg-slate-100 dark:bg-slate-900/50 text-slate-600 dark:text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-300/30 dark:border-slate-700/30 font-nova">
+                                            <th class="px-4 py-3 font-semibold">No</th>
+                                            <th class="px-4 py-3 font-semibold">Tanggal</th>
+                                            <th class="px-4 py-3 font-semibold">Hari (Strata)</th>
+                                            <th class="px-4 py-3 font-semibold">Pendapatan (Total Harga)</th>
+                                            <th class="px-4 py-3 font-semibold text-right">Jumlah Transaksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sampling-table-body"
+                                        class="divide-y divide-slate-300/10 dark:divide-slate-700/10 font-sans">
+                                        <!-- Dynamic rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination Controls -->
+                            <div class="flex justify-between items-center text-xs pt-2">
+                                <button onclick="prevSamplingPage()" id="btn-sampling-prev"
+                                    class="px-3 py-1.5 rounded-lg border border-slate-300/30 dark:border-slate-700/30 bg-white/50 dark:bg-slate-800/50 hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Sebelumnya
+                                </button>
+                                <span id="sampling-pagination-info" class="text-slate-500">Halaman 1 dari 1</span>
+                                <button onclick="nextSamplingPage()" id="btn-sampling-next"
+                                    class="px-3 py-1.5 rounded-lg border border-slate-300/30 dark:border-slate-700/30 bg-white/50 dark:bg-slate-800/50 hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Selanjutnya
+                                </button>
                             </div>
                         </div>
-                    </div>
-                </div>
             </section>
 
-            <!-- ================= TAB: API & PYTHON DOCS ================= -->
+            <!-- ================= TAB: DIAGNOSA DATA SAMPLING ================= -->
             <section id="tab-api-doc" class="tab-content space-y-6 hidden">
                 <div class="border-l-4 border-brand-500 pl-4">
-                    <h3 class="text-2xl font-bold">Konektivitas &amp; Integrasi Backend Python</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Merapikan integrasi data dari API berbasis FastAPI Python menuju UI Frontend</p>
+                    <h3 class="text-2xl font-bold">Diagnosa &amp; Alur Sampling Data</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Analisis presisi ketidakpastian dan pemetaan
+                        alur pengambilan sampel secara bertahap</p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Dokumentasi Endpoint & Kode Python -->
-                    <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
-                        <div class="space-y-3">
-                            <div class="flex items-center space-x-2">
-                                <span class="px-2.5 py-1 text-xs font-extrabold bg-green-500 text-white rounded-md">GET</span>
-                                <code class="text-xs font-mono text-slate-700 dark:text-slate-300">/api/v1/sampling-curve</code>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Kiri & Tengah: Laporan Diagnosa & Alur Proses -->
+                    <div class="lg:col-span-2 space-y-6">
+
+                        <!-- Panel Alur Sampling (Flow) -->
+                        <div class="glassmorphism glass-card rounded-2xl p-6 space-y-6">
+                            <h4
+                                class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-brand-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                    </path>
+                                </svg>
+                                Alur Kerja Penarikan Sampel (Sampling Data Flow)
+                            </h4>
+
+                            <!-- Flow Steps -->
+                            <div
+                                class="relative pl-6 border-l-2 border-dashed border-slate-300 dark:border-slate-700 space-y-8 py-2">
+                                <!-- Step 1 -->
+                                <div class="relative">
+                                    <span
+                                        class="absolute -left-[35px] top-0.5 w-6 h-6 rounded-full bg-brand-500 text-white font-extrabold text-[10px] flex items-center justify-center border-4 border-slate-50 dark:border-darkBg shadow-md">1</span>
+                                    <div class="space-y-1">
+                                        <h5 class="text-sm font-bold text-slate-900 dark:text-white">Pembentukan
+                                            Populasi Data Riil</h5>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                            Dataset harian diimpor dari lembaran <strong>"perhitungan daily
+                                                revenue"</strong> (N = 304 hari operasional) dengan total pendapatan
+                                            9,75 Miliar sebagai populasi utama.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Step 2 -->
+                                <div class="relative">
+                                    <span
+                                        class="absolute -left-[35px] top-0.5 w-6 h-6 rounded-full bg-[#00a3e0] text-white font-extrabold text-[10px] flex items-center justify-center border-4 border-slate-50 dark:border-darkBg shadow-md">2</span>
+                                    <div class="space-y-1">
+                                        <h5 class="text-sm font-bold text-slate-900 dark:text-white">Penarikan Sampel
+                                            Acak (20% Ukuran Sampel)</h5>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                            Penarikan sampel sub-kelompok: <strong>Simple Random Sampling (n =
+                                                61)</strong> secara acak murni, dan <strong>Stratified Random Sampling
+                                                (n = 60)</strong> yang distratifikasikan secara proporsional berdasarkan
+                                            variabel Hari Kerja (Weekday) vs Hari Minggu/Libur (Weekend).
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Step 3 -->
+                                <div class="relative">
+                                    <span
+                                        class="absolute -left-[35px] top-0.5 w-6 h-6 rounded-full bg-[#da291c] text-white font-extrabold text-[10px] flex items-center justify-center border-4 border-slate-50 dark:border-darkBg shadow-md">3</span>
+                                    <div class="space-y-1">
+                                        <h5 class="text-sm font-bold text-slate-900 dark:text-white">Penerapan Faktor
+                                            Koreksi Populasi Terbatas (FPC)</h5>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                            Menggunakan FPC karena sampling dilakukan tanpa pengembalian pada populasi
+                                            terbatas: $\text{FPC} = \sqrt{\frac{N-n}{N-1}} = \sqrt{\frac{304-61}{303}}
+                                            \approx 0.895$. Hal ini mempersempit margin kesalahan estimasi.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Step 4 -->
+                                <div class="relative">
+                                    <span
+                                        class="absolute -left-[35px] top-0.5 w-6 h-6 rounded-full bg-indigo-600 text-white font-extrabold text-[10px] flex items-center justify-center border-4 border-slate-50 dark:border-darkBg shadow-md">4</span>
+                                    <div class="space-y-1">
+                                        <h5 class="text-sm font-bold text-slate-900 dark:text-white">Kalkulasi Standar
+                                            Kesalahan &amp; Selang Kepercayaan (95% CI)</h5>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                            Nilai kesalahan standar ($SE = \frac{\sigma}{\sqrt{n}} \times \text{FPC}$)
+                                            dikalikan skor-z kritis ($1.96$) menghasilkan interval kepercayaan. SRS
+                                            menghasilkan rata-rata 31.318 (SE: 1.935), sedangkan Stratified menghasilkan
+                                            rata-rata 31.456 (SE: 2.226).
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <h4 class="font-bold text-lg">Skrip Backend FastAPI Python</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                                Gunakan kode Python berikut untuk menyajikan data yang sepenuhnya kompatibel dengan struktur dasbor ini.
-                            </p>
                         </div>
 
-                        <!-- Blok Kode Code-block -->
-                        <div class="bg-slate-950/90 rounded-xl p-4 overflow-x-auto border border-slate-800 text-[11px] text-slate-300 font-mono space-y-1">
-                            <p class="text-emerald-400">from fastapi import FastAPI</p>
-                            <p class="text-emerald-400">import numpy as np</p>
-                            <p class="text-emerald-400">from scipy.stats import norm</p>
-                            <p class="text-slate-500"># Inisialisasi API</p>
-                            <p><span class="text-indigo-400">app</span> = FastAPI()</p>
-                            <br>
-                            <p><span class="text-amber-400">@app.get</span>(<span class="text-emerald-300">"/api/v1/sampling-curve"</span>)</p>
-                            <p><span class="text-purple-400">def</span> <span class="text-sky-400">get_sampling_curve</span>(mean: float = 50, std: float = 10, n: int = 1000):</p>
-                            <p class="pl-4 text-slate-500"># Generate titik X dalam rentang kurva</p>
-                            <p class="pl-4">x = np.linspace(mean - 4*std, mean + 4*std, 100)</p>
-                            <p class="pl-4 text-slate-500"># Hitung Probabilitas Densitas (Y)</p>
-                            <p class="pl-4">y = norm.pdf(x, mean, std)</p>
-                            <p class="pl-4 text-purple-400">return</p> {
-                            <p class="pl-8"><span class="text-emerald-300">"mean"</span>: mean,</p>
-                            <p class="pl-8"><span class="text-emerald-300">"std_dev"</span>: std,</p>
-                            <p class="pl-8"><span class="text-emerald-300">"coordinates"</span>: [{"x": float(xi), "y": float(yi)} for xi, yi in zip(x, y)]</p>
-                            <p class="pl-4">}</p>
+                        <!-- Hasil Diagnosa & Validasi Asumsi -->
+                        <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4">
+                            <h4
+                                class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Validasi Asumsi &amp; Diagnosa Distribusi
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 rounded-xl bg-green-500/5 border border-green-500/10 space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-bold text-green-600 dark:text-green-400 uppercase">Uji
+                                            Normalitas Kolmogorov-Smirnov</span>
+                                        <span
+                                            class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-500/20 text-green-700 dark:text-green-300">LOLOS</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                        Nilai signifikansi hitung diperoleh $p = 0.38 > 0.05$. Ini membuktikan bahwa
+                                        data pendapatan harian berdistribusi wajar dan metode statistik parametrik sah
+                                        digunakan.
+                                    </p>
+                                </div>
+                                <div class="p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span
+                                            class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase">Akurasi
+                                            Rata-rata Sampel</span>
+                                        <span
+                                            class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-700 dark:text-blue-300">SANGAT
+                                            TINGGI</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                        Selisih rata-rata SRS dengan Populasi hanya sebesar $2.34\%$, sedangkan
+                                        Stratified sebesar $1.91\%$. Keduanya memberikan estimasi titik yang sangat
+                                        representatif.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="flex justify-between items-center text-[11px] text-slate-500">
-                            <span>Pustaka yang dibutuhkan: <code class="bg-slate-200/50 dark:bg-slate-800 px-1 py-0.5 rounded text-indigo-500 font-mono">fastapi uvicorn numpy scipy</code></span>
+                        <!-- Tabel Ringkasan Perbandingan Statistik -->
+                        <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4">
+                            <h4
+                                class="font-bold text-lg border-b border-slate-300/30 dark:border-slate-700/30 pb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                    </path>
+                                </svg>
+                                Tabel Perbandingan Statistik Deskriptif
+                            </h4>
+                            <div class="overflow-x-auto border border-slate-300/30 dark:border-slate-700/30 rounded-xl">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr
+                                            class="bg-slate-100 dark:bg-slate-900/50 text-slate-600 dark:text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-300/30 dark:border-slate-700/30">
+                                            <th class="px-4 py-3 font-semibold">Metrik Analisis</th>
+                                            <th class="px-4 py-3 font-semibold text-blue-600 dark:text-blue-400">
+                                                Populasi (Sensus)</th>
+                                            <th class="px-4 py-3 font-semibold text-red-600 dark:text-red-400">Simple
+                                                Random (SRS)</th>
+                                            <th class="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400">
+                                                Stratified Random</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-300/10 dark:divide-slate-700/10 font-sans">
+                                        <tr class="hover:bg-slate-200/20 dark:hover:bg-slate-800/10 transition-colors">
+                                            <td class="px-4 py-3 font-semibold text-slate-500">Ukuran Sampel (n)</td>
+                                            <td class="px-4 py-3 font-bold text-slate-700 dark:text-slate-300">N = 304
+                                            </td>
+                                            <td class="px-4 py-3 font-bold text-slate-700 dark:text-slate-300">n = 61
+                                                (20%)</td>
+                                            <td class="px-4 py-3 font-bold text-slate-700 dark:text-slate-300">n = 60
+                                                (20%)</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-200/20 dark:hover:bg-slate-800/10 transition-colors">
+                                            <td class="px-4 py-3 font-semibold text-slate-500">Rata-rata Pendapatan
+                                                (Mean)</td>
+                                            <td class="px-4 py-3 font-bold text-brand-600 dark:text-brand-400">32.070
+                                            </td>
+                                            <td class="px-4 py-3 font-semibold">31.318</td>
+                                            <td class="px-4 py-3 font-semibold">31.456</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-200/20 dark:hover:bg-slate-800/10 transition-colors">
+                                            <td class="px-4 py-3 font-semibold text-slate-500">Simpangan Baku (SD)</td>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">17.336</td>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">16.910</td>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">19.032</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-200/20 dark:hover:bg-slate-800/10 transition-colors">
+                                            <td class="px-4 py-3 font-semibold text-slate-500">Standard Error (SE)</td>
+                                            <td class="px-4 py-3 text-slate-400 font-mono">-</td>
+                                            <td class="px-4 py-3 font-semibold text-slate-700 dark:text-slate-300">1.935
+                                            </td>
+                                            <td class="px-4 py-3 font-semibold text-slate-700 dark:text-slate-300">2.226
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-200/20 dark:hover:bg-slate-800/10 transition-colors">
+                                            <td class="px-4 py-3 font-semibold text-slate-500">Faktor Koreksi (FPC)</td>
+                                            <td class="px-4 py-3 text-slate-400 font-mono">-</td>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">0.895</td>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">0.896</td>
+                                        </tr>
+                                        <tr class="hover:bg-slate-200/20 dark:hover:bg-slate-800/10 transition-colors">
+                                            <td class="px-4 py-3 font-semibold text-slate-500">Interval Kepercayaan (95%
+                                                CI)</td>
+                                            <td class="px-4 py-3 text-slate-400 font-mono">-</td>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">27.527 - 35.110
+                                            </td>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">27.093 - 35.820
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
                     </div>
 
-                    <!-- Simulator Konsol API Interaktif -->
-                    <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-bold text-lg mb-1">Simulator Konsol Respons API (JSON)</h4>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">
-                                Ubah nilai parameter di Tab 2 dan saksikan perubahan representasi JSON yang diterima oleh web portal.
-                            </p>
+                    <!-- Kanan: Laporan Metrik Statis & Hasil Akhir -->
+                    <div class="space-y-6">
+
+                        <!-- Kartu Skor Diagnosa Terhitung -->
+                        <div
+                            class="glassmorphism glass-card rounded-2xl p-6 bg-gradient-to-br from-slate-900 to-slate-950 text-white space-y-4">
+                            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                                <h4 class="font-bold text-sm uppercase tracking-wider text-slate-300">Hasil Sampling
+                                    Akhir</h4>
+                                <select id="diagnosa-method-select" onchange="toggleDiagnosaMethod(this.value)"
+                                    class="text-[10px] bg-slate-800 border border-slate-700 rounded px-2 py-1 focus:outline-none text-brand-400 font-bold">
+                                    <option value="srs">Simple Random (SRS)</option>
+                                    <option value="stratified">Stratified Random</option>
+                                </select>
+                            </div>
+
+                            <div class="space-y-3.5">
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-400">Total Populasi (N)</span>
+                                    <span class="font-extrabold text-sm" id="diag-pop-size">304</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-400">Ukuran Sampel (n)</span>
+                                    <span class="font-extrabold text-sm text-brand-400" id="diag-sample-size">61</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-400">Rata-rata Sampel (x̄)</span>
+                                    <span class="font-extrabold text-sm text-[#00a3e0]" id="diag-mean">31.318</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-400">Simpangan Baku (s)</span>
+                                    <span class="font-extrabold text-sm text-[#da291c]" id="diag-std">16.910</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-400">Faktor Koreksi FPC</span>
+                                    <span class="font-extrabold text-sm text-yellow-500" id="diag-fpc">0.895</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs border-t border-white/10 pt-3">
+                                    <span class="text-slate-400">Standard Error (SE)</span>
+                                    <span class="font-extrabold text-sm text-emerald-400" id="diag-se">1.935</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-400">Margin of Error (95%)</span>
+                                    <span class="font-extrabold text-sm text-emerald-400" id="diag-moe">± 3.792</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="relative bg-slate-950/95 border border-slate-800 rounded-xl p-4 flex-1 flex flex-col justify-between min-h-[300px]">
-                            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2 text-slate-500 text-[10px]">
-                                <span class="flex items-center"><span class="w-2.5 h-2.5 bg-green-500 rounded-full mr-1.5 inline-block animate-pulse"></span> 200 OK</span>
-                                <span>Aplikasi Terkoneksi (Simulasi)</span>
-                            </div>
-                            <pre id="api-json-console" class="text-xs font-mono text-indigo-300 overflow-y-auto max-h-[250px] flex-1 leading-relaxed">
-{
-  "status": "success",
-  "data": {
-    "distribution": "normal",
-    "params": {
-      "mean": 50.0,
-      "std_dev": 10.0,
-      "size": 1000
-    },
-    "preview_coordinates": [
-      {"x": 10, "y": 0.0001},
-      {"x": 20, "y": 0.0004},
-      {"x": 30, "y": 0.0044},
-      {"x": 40, "y": 0.0242},
-      {"x": 50, "y": 0.0399},
-      {"x": 60, "y": 0.0242}
-    ]
-  }
-}
-                            </pre>
-                            <div class="pt-2 border-t border-slate-800 flex justify-between items-center text-[10px] text-slate-500">
-                                <span>Metode: Fetch Async API JSON</span>
-                                <button onclick="copyToClipboard()" class="text-slate-400 hover:text-slate-200 transition-colors">Salin JSON</button>
+                        <!-- Panel Selang Kepercayaan -->
+                        <div class="glassmorphism glass-card rounded-2xl p-6 space-y-4">
+                            <h4 class="font-bold text-sm uppercase tracking-wider text-slate-400">Interval Kepercayaan
+                                95%</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-xs font-semibold text-slate-500">
+                                    <span>Batas Bawah</span>
+                                    <span>Batas Atas</span>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between text-sm font-extrabold p-3 bg-slate-200/50 dark:bg-slate-900/50 rounded-xl border border-slate-300/10">
+                                    <span class="text-slate-600 dark:text-slate-300" id="diag-ci-lower">27.527</span>
+                                    <div
+                                        class="h-1 flex-1 mx-3 bg-gradient-to-r from-brand-500 to-[#00a3e0] rounded-full">
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-300" id="diag-ci-upper">35.110</span>
+                                </div>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed text-center"
+                                    id="diag-ci-text">
+                                    Kami percaya 95% bahwa rata-rata populasi pendapatan harian sebenarnya berada di
+                                    antara 27.527 dan 35.110.
+                                </p>
                             </div>
                         </div>
 
-                        <div class="p-3 bg-brand-500/10 rounded-xl border border-brand-500/20 text-xs text-slate-600 dark:text-slate-300">
-                            <strong>Keterangan:</strong> Modul frontend aplikasi ini menggunakan teknik asinkronus (Async/Await) untuk mensimulasikan skenario rendering real-time pasca pemrosesan Python.
-                        </div>
                     </div>
                 </div>
             </section>
@@ -678,19 +1404,194 @@
 
         <!-- FOOTER KONSOL -->
         <footer class="glassmorphism border-t mt-16 py-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div
+                class="w-full px-4 sm:px-8 lg:px-12 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p class="text-xs text-slate-500">
                     &copy; 2026 PyAnalytics Studio. Mode Kerja Dasbor Operasional.
                 </p>
                 <div class="flex space-x-4 text-xs text-slate-500">
-                    <button onclick="leaveAppConsole()" class="hover:text-brand-500 transition-colors">&larr; Kembali ke Landing Page</button>
+                    <button onclick="leaveAppConsole()" class="hover:text-brand-500 transition-colors">&larr; Kembali ke
+                        Landing Page</button>
                 </div>
             </div>
         </footer>
     </div>
 
 
+
+    <!-- ================= MODAL SUMBER DATA PYTHON & GAMBAR ASLI ================= -->
+    <div id="python-source-modal"
+        class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in"
+        onclick="if(event.target === this) closePythonSourceModal()">
+        <div
+            class="glassmorphism w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-white/10 flex flex-col max-h-[85vh] bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+            <!-- Header -->
+            <div
+                class="px-6 py-4 border-b border-slate-200/50 dark:border-white/10 flex items-center justify-between bg-slate-50/90 dark:bg-slate-900/90">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider">Sumber Data &amp; Visualisasi Asli
+                        Python</h3>
+                </div>
+                <button onclick="closePythonSourceModal()"
+                    class="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+                <!-- Sidebar Nav -->
+                <div
+                    class="w-full md:w-64 bg-slate-100/50 dark:bg-slate-950/40 border-b md:border-b-0 md:border-r border-slate-200/50 dark:border-white/10 p-4 space-y-4 overflow-y-auto">
+                    <div>
+                        <h4
+                            class="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2">
+                            Python Script</h4>
+                        <div class="space-y-1">
+                            <button id="modal-tab-srs-code" onclick="selectModalTab('srs-code')"
+                                class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between transition-all bg-brand-500/10 text-brand-600 dark:text-brand-400">
+                                <span>sampling_srs.py</span>
+                                <span
+                                    class="text-[9px] bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400">SRS</span>
+                            </button>
+                            <button id="modal-tab-stratified-code" onclick="selectModalTab('stratified-code')"
+                                class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all hover:bg-slate-200/50 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
+                                <span>sampling_stratified.py</span>
+                                <span
+                                    class="text-[9px] bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400">Stratified</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4
+                            class="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2">
+                            Visualisasi Asli (Images)</h4>
+                        <div class="space-y-1">
+                            <button id="modal-tab-srs-img" onclick="selectModalTab('srs-img')"
+                                class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all hover:bg-slate-200/50 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
+                                <span>Kurva Populasi vs SRS</span>
+                            </button>
+                            <button id="modal-tab-stratified-img" onclick="selectModalTab('stratified-img')"
+                                class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all hover:bg-slate-200/50 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
+                                <span>Kurva Populasi vs Stratified</span>
+                            </button>
+                            <button id="modal-tab-general-img" onclick="selectModalTab('general-img')"
+                                class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all hover:bg-slate-200/50 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
+                                <span>Semua Plot (Seaborn)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Viewer -->
+                <div class="flex-1 flex flex-col overflow-hidden bg-slate-950/10 p-6">
+                    <!-- Tab Pane: Code SRS -->
+                    <div id="modal-pane-srs-code" class="modal-pane flex flex-col h-full space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800 dark:text-white">Script Python: Simple
+                                    Random Sampling</h4>
+                                <p class="text-xs text-slate-500">File lokal:
+                                    <code>srs dan strata/sampling_srs.py</code>
+                                </p>
+                            </div>
+                            <a href="srs dan strata/sampling_srs.py" download
+                                class="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all shadow-md flex items-center space-x-1">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                <span>Unduh Script</span>
+                            </a>
+                        </div>
+                        <pre class="flex-1 bg-slate-950 border border-white/5 p-4 rounded-2xl font-mono text-xs overflow-auto select-text text-slate-350 shadow-inner"
+                            id="code-srs-viewer">Memuat script...</pre>
+                    </div>
+
+                    <!-- Tab Pane: Code Stratified -->
+                    <div id="modal-pane-stratified-code" class="modal-pane hidden flex flex-col h-full space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800 dark:text-white">Script Python: Stratified
+                                    Random Sampling</h4>
+                                <p class="text-xs text-slate-500">File lokal:
+                                    <code>srs dan strata/sampling_stratified.py</code>
+                                </p>
+                            </div>
+                            <a href="srs dan strata/sampling_stratified.py" download
+                                class="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all shadow-md flex items-center space-x-1">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                <span>Unduh Script</span>
+                            </a>
+                        </div>
+                        <pre class="flex-1 bg-slate-950 border border-white/5 p-4 rounded-2xl font-mono text-xs overflow-auto select-text text-slate-350 shadow-inner"
+                            id="code-stratified-viewer">Memuat script...</pre>
+                    </div>
+
+                    <!-- Tab Pane: Image SRS -->
+                    <div id="modal-pane-srs-img" class="modal-pane hidden flex flex-col h-full space-y-4">
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800 dark:text-white">Visualisasi Matplotlib Asli:
+                                Populasi vs SRS</h4>
+                            <p class="text-xs text-slate-500">File gambar: <code>Images/distribusi_pop_vs_srs.png</code>
+                            </p>
+                        </div>
+                        <div
+                            class="flex-1 border border-white/10 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center p-2 shadow-inner">
+                            <img src="Images/distribusi_pop_vs_srs.png" alt="Populasi vs SRS"
+                                class="max-h-full max-w-full object-contain rounded-lg">
+                        </div>
+                    </div>
+
+                    <!-- Tab Pane: Image Stratified -->
+                    <div id="modal-pane-stratified-img" class="modal-pane hidden flex flex-col h-full space-y-4">
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800 dark:text-white">Visualisasi Matplotlib Asli:
+                                Populasi vs Stratified</h4>
+                            <p class="text-xs text-slate-500">File gambar:
+                                <code>Images/distribusi_pop_vs_stratified.png</code>
+                            </p>
+                        </div>
+                        <div
+                            class="flex-1 border border-white/10 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center p-2 shadow-inner">
+                            <img src="Images/distribusi_pop_vs_stratified.png" alt="Populasi vs Stratified"
+                                class="max-h-full max-w-full object-contain rounded-lg">
+                        </div>
+                    </div>
+
+                    <!-- Tab Pane: Image General -->
+                    <div id="modal-pane-general-img" class="modal-pane hidden flex flex-col h-full space-y-4">
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800 dark:text-white">Visualisasi Matplotlib Asli:
+                                Semua Plot (Seaborn)</h4>
+                            <p class="text-xs text-slate-500">File gambar: <code>Images/image.png</code></p>
+                        </div>
+                        <div
+                            class="flex-1 border border-white/10 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center p-2 shadow-inner">
+                            <img src="Images/image.png" alt="Semua Plot Asli"
+                                class="max-h-full max-w-full object-contain rounded-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- ================= LOGIKA JAVASCRIPT UTAMA ================= -->
+    <script src="data_excel.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
