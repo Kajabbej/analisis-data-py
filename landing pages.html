@@ -344,7 +344,7 @@
                 <!-- Interactive Cursor Spotlight Backdrop (follows cursor in JS) -->
                 <div id="hero-spotlight"
                     class="absolute inset-0 pointer-events-none z-10 opacity-30 transition-opacity duration-700"
-                    style="background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.22) 0%, transparent 60%);">
+                    style="background: radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.15) 0%, transparent 60%);">
                 </div>
 
                 <!-- Transparent gradient mask to ensure maximum text readability and seamless transition to the white content below -->
@@ -359,7 +359,7 @@
                         <h2
                             class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none font-alkatra text-center">
                             <span id="hero-title-1"
-                                class="bg-gradient-to-r from-[#00f2fe] to-[#4facfe] bg-clip-text text-transparent block pb-1 drop-shadow-[0_0_15px_rgba(0,242,254,0.3)] select-none">Metode
+                                class="bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent block pb-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] select-none">Metode
                                 Statistika</span>
                             <span id="hero-title-2" class="text-white block mt-2">Data Analisis UTM</span>
                         </h2>
@@ -369,11 +369,11 @@
                         </p>
                         <div class="pt-4 flex flex-row items-center justify-center space-x-6">
                             <a href="index.html"
-                                class="px-6 py-2.5 bg-gradient-to-r from-[#00f2fe] to-[#0071e3] hover:from-[#33f5ff] hover:to-[#1a82f0] text-white rounded-full font-bold text-sm tracking-wide transition-all transform hover:scale-105 active:scale-95 duration-300 shadow-[0_0_20px_rgba(0,242,254,0.35)] hover:shadow-[0_0_30px_rgba(0,242,254,0.6)]">
+                                class="px-6 py-2.5 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black rounded-full font-bold text-sm tracking-wide transition-all transform hover:scale-105 active:scale-95 duration-300 shadow-[0_0_20px_rgba(250,204,21,0.35)] hover:shadow-[0_0_30px_rgba(250,204,21,0.6)]">
                                 Buka Konsol Analisis
                             </a>
                             <a href="#workflow"
-                                class="text-[#00d2ff] hover:text-[#00f2fe] hover:underline font-bold text-sm flex items-center space-x-1 group">
+                                class="text-yellow-400 hover:text-yellow-300 hover:underline font-bold text-sm flex items-center space-x-1 group">
                                 <span>Pelajari Selengkapnya</span>
                                 <span
                                     class="transform group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
@@ -389,7 +389,7 @@
                         class="text-[9px] uppercase tracking-[0.4em] text-slate-400/80 font-medium mb-1.5">Scroll</span>
                     <div class="w-5 h-8 border border-slate-500/40 rounded-full flex justify-center p-1">
                         <div
-                            class="w-1.5 h-1.5 bg-[#00f2fe] rounded-full animate-bounce shadow-[0_0_8px_rgba(0,242,254,0.8)]">
+                            class="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce shadow-[0_0_8px_rgba(250,204,21,0.8)]">
                         </div>
                     </div>
                 </div>
@@ -1110,7 +1110,7 @@
                     const rect = heroSection.getBoundingClientRect();
                     const x = ((e.clientX - rect.left) / rect.width) * 100;
                     const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    spotlight.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(0, 242, 254, 0.22) 0%, transparent 60%)`;
+                    spotlight.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(250, 204, 21, 0.15) 0%, transparent 60%)`;
                 });
             }
 
