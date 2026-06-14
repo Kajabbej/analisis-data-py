@@ -27,15 +27,15 @@
         content="Pusat kajian analisis data statistik terpadu dengan visualisasi kurva distribusi Gaussian, pemodelan regresi linear, dan simulasi pengambilan sampel acak secara dinamis." />
     <meta name="twitter:image" content="https://kajabbej.github.io/analisis-data-py/hero_analysts_og.jpg" />
 
-    <!-- Google Fonts - Plus Jakarta Sans, Nova Flat, Syncopate & Orbitron -->
+    <!-- Google Fonts - Plus Jakarta Sans, Nova Flat, Syncopate, Orbitron & Alkatra -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Nova+Flat&family=Syncopate:wght@700&family=Orbitron:wght@700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Nova+Flat&family=Syncopate:wght@700&family=Orbitron:wght@700;900&family=Alkatra:wght@400;500;600;700&display=swap"
         as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link
-            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Nova+Flat&family=Syncopate:wght@700&family=Orbitron:wght@700;900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Nova+Flat&family=Syncopate:wght@700&family=Orbitron:wght@700;900&family=Alkatra:wght@400;500;600;700&display=swap"
             rel="stylesheet">
     </noscript>
 
@@ -54,6 +54,7 @@
                         sans: ['"Plus Jakarta Sans"', '"Google Sans"', '"Product Sans"', 'system-ui', '-apple-system', 'sans-serif'],
                         nova: ['"Nova Flat"', 'system-ui', '-apple-system', 'sans-serif'],
                         display: ['"Syncopate"', '"Orbitron"', 'sans-serif'],
+                        alkatra: ['"Alkatra"', 'cursive', 'system-ui', 'sans-serif'],
                     },
                     colors: {
                         brand: {
@@ -137,11 +138,67 @@
             max-height: 400px;
             opacity: 1;
         }
+
+        /* Scrolled Header Common Styles */
+        #main-header.scrolled {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Dark Mode Scrolled */
+        html.dark #main-header.scrolled {
+            background-color: rgba(5, 7, 26, 0.85);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Light Mode Scrolled */
+        html:not(.dark) #main-header.scrolled {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-color: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        html:not(.dark) #main-header.scrolled #header-container a {
+            color: #1e293b;
+        }
+
+        html:not(.dark) #main-header.scrolled #header-container .text-slate-500 {
+            color: #64748b;
+        }
+
+        html:not(.dark) #main-header.scrolled #header-container .text-slate-800 {
+            color: #1e293b;
+        }
+
+        html:not(.dark) #main-header.scrolled #header-container nav {
+            color: #475569;
+        }
+
+        html:not(.dark) #main-header.scrolled #header-container nav a {
+            color: #475569;
+        }
+
+        html:not(.dark) #main-header.scrolled #header-container nav a:hover {
+            color: #0f172a;
+        }
+
+        html:not(.dark) #main-header.scrolled #theme-toggle-btn,
+        html:not(.dark) #main-header.scrolled #hamburger-btn {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.08);
+            color: #1e293b;
+        }
+
+        /* Hide starfield canvas in light mode to allow white page background to render */
+        html:not(.dark) #starfield-canvas {
+            display: none !important;
+        }
     </style>
 </head>
 
 <body
-    class="bg-slate-50 text-slate-900 dark:bg-darkBg dark:text-slate-100 min-h-screen font-sans antialiased overflow-x-hidden">
+    class="bg-white text-slate-900 dark:bg-darkBg dark:text-slate-100 min-h-screen font-sans antialiased overflow-x-hidden">
 
     <!-- Efek Dekorasi Latar Belakang Global -->
     <div
@@ -158,14 +215,15 @@
     <div id="view-landing-page" class="flex flex-col min-h-screen transition-all duration-500">
 
         <!-- HEADER / NAVIGATION (CLEAN MINIMALIST & TRANSPARENT OVERLAY) -->
-        <header
-            class="absolute top-0 left-0 z-40 w-full bg-transparent border-b border-transparent transition-all duration-300">
-            <div class="w-full px-4 sm:px-8 lg:px-12 flex items-center justify-between h-24">
+        <header id="main-header"
+            class="fixed top-0 left-0 z-40 w-full bg-transparent border-b border-transparent transition-all duration-300">
+            <div id="header-container"
+                class="w-full px-6 sm:px-12 lg:px-16 flex items-center justify-between h-24 transition-all duration-300">
 
                 <!-- Logo Section: UTM Logo -->
                 <a href="#" class="flex items-center space-x-3.5 group">
                     <img src="utm-logo.webp" onerror="this.onerror=null; this.src='utm-logo.png';" alt="UTM Logo"
-                        class="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300">
+                        class="w-10 h-10 object-contain transform group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_rgba(0,242,254,0.7)] transition-all duration-300">
                     <div class="text-left">
                         <div class="text-[9px] font-bold tracking-[0.2em] text-slate-300 lowercase leading-tight">
                             universitas</div>
@@ -177,17 +235,33 @@
                 <!-- Right Side: Desktop Nav -->
                 <div class="flex items-center space-x-8">
                     <nav
-                        class="hidden md:flex items-center space-x-12 text-[13px] font-medium tracking-widest text-slate-200">
-                        <a href="#about-project" class="hover:text-white transition-colors">project</a>
-                        <a href="#about-me" class="hover:text-white transition-colors">About</a>
-                        <a href="#workflow" class="hover:text-white transition-colors">Contact</a>
-                        <a href="index.html" class="hover:text-white transition-colors">analisis</a>
+                        class="hidden md:flex items-center space-x-12 text-[13px] font-medium tracking-widest text-slate-300">
+                        <a href="#about-project" class="relative pb-1 hover:text-white transition-colors group">
+                            Project
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00f2fe] to-[#0071e3] transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#about-me" class="relative pb-1 hover:text-white transition-colors group">
+                            About
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00f2fe] to-[#0071e3] transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#workflow" class="relative pb-1 hover:text-white transition-colors group">
+                            Contact
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00f2fe] to-[#0071e3] transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="index.html" class="relative pb-1 hover:text-white transition-colors group">
+                            Analisis
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00f2fe] to-[#0071e3] transition-all duration-300 group-hover:w-full"></span>
+                        </a>
                     </nav>
 
                     <div class="flex items-center space-x-3">
                         <!-- Theme Toggle (Subtle Glassmorphic) -->
                         <button onclick="toggleTheme()" id="theme-toggle-btn"
-                            class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white"
+                            class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transform hover:scale-105 active:scale-95 hover:shadow-[0_0_15px_rgba(0,242,254,0.3)] transition-all duration-300 text-white"
                             title="Ubah Tema">
                             <svg id="sun-icon-landing" class="w-4 h-4 hidden" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -205,7 +279,7 @@
 
                         <!-- Hamburger (Mobile Only) -->
                         <button onclick="toggleMobileMenu()" id="hamburger-btn"
-                            class="md:hidden p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all"
+                            class="md:hidden p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all transform hover:scale-105 active:scale-95"
                             aria-label="Buka Menu">
                             <svg id="hamburger-icon" class="w-5 h-5" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -224,14 +298,14 @@
 
             <!-- Mobile Menu Dropdown -->
             <div id="mobile-menu"
-                class="hidden md:hidden bg-[#05071a]/95 backdrop-blur-md border-t border-white/10 px-4 pb-4">
+                class="hidden md:hidden bg-white/95 dark:bg-[#05071a]/95 backdrop-blur-md border-t border-slate-200 dark:border-white/10 px-4 pb-4">
                 <nav class="flex flex-col space-y-1 pt-3">
                     <a href="#about-project" onclick="closeMobileMenu()"
-                        class="text-sm font-bold text-slate-200 hover:text-white py-2 px-3 rounded-lg hover:bg-white/10 transition-all uppercase tracking-wider">project</a>
+                        class="text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition-all uppercase tracking-wider">Project</a>
                     <a href="#about-me" onclick="closeMobileMenu()"
-                        class="text-sm font-bold text-slate-200 hover:text-white py-2 px-3 rounded-lg hover:bg-white/10 transition-all uppercase tracking-wider">About</a>
+                        class="text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition-all uppercase tracking-wider">About</a>
                     <a href="#workflow" onclick="closeMobileMenu()"
-                        class="text-sm font-bold text-slate-200 hover:text-white py-2 px-3 rounded-lg hover:bg-white/10 transition-all uppercase tracking-wider">Content</a>
+                        class="text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition-all uppercase tracking-wider">Contact</a>
                     <a href="index.html"
                         class="mt-2 px-4 py-2.5 bg-[#da291c] hover:bg-[#b51c14] text-white rounded-lg font-extrabold text-xs uppercase tracking-wider text-center transition-all">Buka
                         Konsol Analisis &rarr;</a>
@@ -240,19 +314,15 @@
         </header>
 
         <!-- LANDING PAGE HERO SECTION -->
-        <main class="flex-1 w-full py-0 space-y-16 relative overflow-hidden bg-[#05071a] text-white z-0 min-h-screen">
-            <!-- Starfield Canvas backdrop -->
+        <main
+            class="flex-1 w-full py-0 relative overflow-hidden bg-white dark:bg-[#05071a] text-slate-800 dark:text-white z-0 min-h-screen">
+            <!-- Starfield Canvas backdrop (Enabled in both modes for the dark hero panel) -->
             <canvas id="starfield-canvas"
                 class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"></canvas>
 
             <!-- Cosmic light source overlay (from top center) -->
             <div
                 class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/10 blur-[130px] pointer-events-none z-10 animate-pulse-slow">
-            </div>
-
-            <!-- Background grid design pattern (Dotted grid from the screenshot) -->
-            <div class="absolute inset-0 opacity-10 pointer-events-none z-10"
-                style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 20px 20px;">
             </div>
 
             <!-- Glowing cyan/red blur circles on sides -->
@@ -263,56 +333,70 @@
                 class="absolute -right-20 -bottom-20 w-80 h-80 bg-[#da291c]/10 rounded-full blur-[80px] pointer-events-none animate-pulse-slow z-10">
             </div>
 
-            <!-- IMMERSIVE SPACE HERO SECTION (MERGED & UNIFIED) -->
-            <section id="about-project" class="font-nova relative w-full pt-32 pb-16 md:pt-40 md:pb-24 z-10">
-                <div class="w-full px-4 sm:px-8 lg:px-12 relative z-20">
+            <!-- SECTION 2: APPLE-STYLE HERO SECTION WITH OVERLAID BACKGROUND VIDEO -->
+            <section id="about-project"
+                class="font-nova relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden z-10 border-b border-white/10 shadow-2xl bg-slate-950">
+
+                <!-- The Full-Width Background Video Canvas -->
+                <canvas id="hero-animation-canvas"
+                    class="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-75 brightness-[1.12] contrast-[1.08] saturate-[1.05] z-0"></canvas>
+
+                <!-- Interactive Cursor Spotlight Backdrop (follows cursor in JS) -->
+                <div id="hero-spotlight"
+                    class="absolute inset-0 pointer-events-none z-10 opacity-30 transition-opacity duration-700"
+                    style="background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.22) 0%, transparent 60%);">
+                </div>
+
+                <!-- Transparent gradient mask to ensure maximum text readability and seamless transition to the white content below -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-white dark:from-[#05071a] via-transparent to-transparent pointer-events-none z-10">
+                </div>
+
+                <!-- Overlay content on top of video -->
+                <div
+                    class="w-full px-4 sm:px-8 lg:px-12 pt-24 pb-8 relative z-20 flex flex-col items-center text-center space-y-4">
                     <div class="max-w-3xl mx-auto text-center space-y-6 flex flex-col items-center">
-
-                        <!-- Center: Big titles & CTA -->
                         <h2
-                            class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none uppercase font-display text-center">
-                            <span id="hero-title-1" class="text-[#00a3e0] text-glow glow-glow block">Metode
+                            class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none font-alkatra text-center">
+                            <span id="hero-title-1"
+                                class="bg-gradient-to-r from-[#00f2fe] to-[#4facfe] bg-clip-text text-transparent block pb-1 drop-shadow-[0_0_15px_rgba(0,242,254,0.3)] select-none">Metode
                                 Statistika</span>
-                            <span id="hero-title-2" class="text-white block mt-1">Data Analisis UTM</span>
+                            <span id="hero-title-2" class="text-white block mt-2">Data Analisis UTM</span>
                         </h2>
-
+                        <p
+                            class="text-lg sm:text-xl text-slate-300 font-medium tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                            analisis &amp; diagnosa data sampling
+                        </p>
+                        <div class="pt-4 flex flex-row items-center justify-center space-x-6">
+                            <a href="index.html"
+                                class="px-6 py-2.5 bg-gradient-to-r from-[#00f2fe] to-[#0071e3] hover:from-[#33f5ff] hover:to-[#1a82f0] text-white rounded-full font-bold text-sm tracking-wide transition-all transform hover:scale-105 active:scale-95 duration-300 shadow-[0_0_20px_rgba(0,242,254,0.35)] hover:shadow-[0_0_30px_rgba(0,242,254,0.6)]">
+                                Buka Konsol Analisis
+                            </a>
+                            <a href="#workflow"
+                                class="text-[#00d2ff] hover:text-[#00f2fe] hover:underline font-bold text-sm flex items-center space-x-1 group">
+                                <span>Pelajari Selengkapnya</span>
+                                <span
+                                    class="transform group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Networking dome / glowing curves at the bottom -->
-                <div>
-                    <path fill="url(#horizon-grad)"
-                        d="M0,240 C240,180 480,140 720,140 C960,140 1200,180 1440,240 L1440,320 L0,320 Z">
-                    </path>
-                    <!-- Glowing networking lines / arcs -->
-                    <path stroke="url(#arc-glow-1)" stroke-width="2.5" fill="none" stroke-linecap="round"
-                        d="M100,280 C300,190 500,160 720,160 C940,160 1140,190 1340,280"></path>
-                    <path stroke="url(#arc-glow-2)" stroke-width="1.5" fill="none" stroke-linecap="round"
-                        stroke-dasharray="12 18" d="M250,240 C450,170 650,150 720,150 C790,150 990,170 1190,240">
-                    </path>
-                    <!-- Gradient definitions -->
-                    <defs>
-                        <linearGradient id="horizon-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#020514" stop-opacity="0.9" />
-                            <stop offset="100%" stop-color="#05071a" stop-opacity="1" />
-                        </linearGradient>
-                        <linearGradient id="arc-glow-1" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="rgba(0,163,224,0)" />
-                            <stop offset="50%" stop-color="rgba(0,163,224,0.7)" />
-                            <stop offset="100%" stop-color="rgba(0,163,224,0)" />
-                        </linearGradient>
-                        <linearGradient id="arc-glow-2" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="rgba(139,92,246,0)" />
-                            <stop offset="50%" stop-color="rgba(139,92,246,0.5)" />
-                            <stop offset="100%" stop-color="rgba(139,92,246,0)" />
-                        </linearGradient>
-                    </defs>
-                    </svg>
+                <!-- Elegant Animated Scroll Indicator -->
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none opacity-0 select-none transition-opacity duration-1000"
+                    id="scroll-indicator">
+                    <span
+                        class="text-[9px] uppercase tracking-[0.4em] text-slate-400/80 font-medium mb-1.5">Scroll</span>
+                    <div class="w-5 h-8 border border-slate-500/40 rounded-full flex justify-center p-1">
+                        <div
+                            class="w-1.5 h-1.5 bg-[#00f2fe] rounded-full animate-bounce shadow-[0_0_8px_rgba(0,242,254,0.8)]">
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Wrap the rest of the page in a max-w-7xl container to maintain alignment -->
-            <div class="w-full px-4 sm:px-8 lg:px-12 space-y-16 pb-12">
+            <div class="max-w-7xl mx-auto w-full px-4 sm:px-8 lg:px-12 space-y-16 pb-12">
 
                 <!-- METODOLOGI & WORKFLOW -->
                 <section id="workflow" class="space-y-6 pt-6">
@@ -781,11 +865,12 @@
 
         // Initialize Theme on Page Load
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
         }
+        updateThemeIcons();
 
         // 2. Custom Toast Notification
         function showToast(message) {
@@ -902,10 +987,132 @@
             animate();
         }
 
-        // 6. GSAP Typewriter & Entrance Timelines
+        // 5b. GSAP Hero Image Sequence Animation
+        function initHeroAnimation() {
+            const canvas = document.getElementById('hero-animation-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            const frameCount = 240;
+            const images = [];
+            const animationObj = { frame: 0 };
+
+            const currentFrame = index => (
+                `Images/animation/ezgif-frame-${String(index + 1).padStart(3, '0')}.jpg`
+            );
+
+            // Handle resizing of the canvas to fit DPR and layout size
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = Math.round(rect.width * dpr);
+                canvas.height = Math.round(rect.height * dpr);
+                render();
+            }
+
+            // Load first frame immediately to avoid blank space
+            const firstImg = new Image();
+            firstImg.onload = () => {
+                resizeCanvas();
+                preloadRest();
+            };
+            firstImg.src = currentFrame(0);
+            images.push(firstImg);
+
+            // Listen for window resize to adjust canvas resolution dynamically
+            window.addEventListener('resize', resizeCanvas);
+
+            function preloadRest() {
+                let loadedCount = 1;
+                for (let i = 1; i < frameCount; i++) {
+                    const img = new Image();
+                    img.onload = () => {
+                        loadedCount++;
+                        if (loadedCount === frameCount) {
+                            startAnimation();
+                        }
+                    };
+                    img.src = currentFrame(i);
+                    images.push(img);
+                }
+            }
+
+            function startAnimation() {
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(animationObj, {
+                        frame: frameCount - 1,
+                        snap: "frame",
+                        ease: "none",
+                        duration: 8, // 8 seconds for 240 frames (30 fps)
+                        repeat: -1,
+                        onUpdate: render
+                    });
+                }
+            }
+
+            function render() {
+                const img = images[Math.round(animationObj.frame)];
+                if (img && img.complete) {
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // Object-cover calculation
+                    const canvasAspect = canvas.width / canvas.height;
+                    const imgAspect = img.naturalWidth / img.naturalHeight;
+
+                    let drawWidth, drawHeight, drawX, drawY;
+                    if (imgAspect > canvasAspect) {
+                        drawHeight = canvas.height;
+                        drawWidth = canvas.height * imgAspect;
+                        drawX = (canvas.width - drawWidth) / 2;
+                        drawY = 0;
+                    } else {
+                        drawWidth = canvas.width;
+                        drawHeight = canvas.width / imgAspect;
+                        drawX = 0;
+                        drawY = (canvas.height - drawHeight) / 2;
+                    }
+
+                    ctx.drawImage(img, Math.round(drawX), Math.round(drawY), Math.round(drawWidth), Math.round(drawHeight));
+                }
+            }
+        }
+
+        // 6. GSAP Typewriter, Sticky Header, Spotlight & Entrance Timelines
         document.addEventListener('DOMContentLoaded', () => {
             updateThemeIcons();
             initStarfield();
+            initHeroAnimation();
+
+            // Sticky Header Scroll Controller
+            const header = document.getElementById('main-header');
+            const headerContainer = document.getElementById('header-container');
+            if (header && headerContainer) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 30) {
+                        header.classList.add('scrolled');
+                        headerContainer.classList.remove('h-24');
+                        headerContainer.classList.add('h-16');
+                    } else {
+                        header.classList.remove('scrolled');
+                        headerContainer.classList.add('h-24');
+                        headerContainer.classList.remove('h-16');
+                    }
+                });
+            }
+
+            // Interactive Cursor Spotlight
+            const heroSection = document.getElementById('about-project');
+            const spotlight = document.getElementById('hero-spotlight');
+            if (heroSection && spotlight) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    spotlight.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(0, 242, 254, 0.22) 0%, transparent 60%)`;
+                });
+            }
 
             if (typeof gsap !== 'undefined') {
                 gsap.registerPlugin(TextPlugin);
@@ -917,8 +1124,17 @@
 
                 // Set initial states for elements
                 gsap.set("#about-project .max-w-3xl > *:not(h2)", { opacity: 0, y: 30 });
+                gsap.set("#main-header", { y: -50, opacity: 0 });
 
                 const tl = gsap.timeline();
+
+                // 0. Header Entrance Slide-Down
+                tl.to("#main-header", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
 
                 // 1. Title pengetikan
                 tl.to("#hero-title-1", {
@@ -939,11 +1155,16 @@
                     duration: 0.6,
                     stagger: 0.15,
                     ease: "power2.out",
-                    // clearProps setelah animasi selesai agar tidak ada residual transform
-                    onComplete: () => gsap.set(
-                        "#about-project .max-w-3xl > *:not(h2)",
-                        { clearProps: "opacity,y" }
-                    )
+                    onComplete: () => {
+                        // clearProps setelah animasi selesai agar tidak ada residual transform
+                        gsap.set("#about-project .max-w-3xl > *:not(h2)", { clearProps: "opacity,y" });
+                        // Elegant fade-in for scroll indicator
+                        const scrollInd = document.getElementById('scroll-indicator');
+                        if (scrollInd) {
+                            scrollInd.classList.remove('opacity-0');
+                            scrollInd.classList.add('opacity-80');
+                        }
+                    }
                 }, "-=0.2");
             }
         });
@@ -1018,7 +1239,7 @@
             // Jalankan via: npx serve . atau Live Server di VS Code
             fetch(filePath)
                 .then(response => {
-                    if (!response.ok) throw new Error(`HTTP ${ response.status } `);
+                    if (!response.ok) throw new Error(`HTTP ${response.status} `);
                     return response.text();
                 })
                 .then(text => {
@@ -1034,8 +1255,8 @@
   • VS Code: klik kanan → "Open with Live Server"
   • Terminal: npx serve.
 
-(Error asli: ${ err.message })`
-                        : `Gagal memuat script: ${ err.message }.`;
+(Error asli: ${err.message})`
+                        : `Gagal memuat script: ${err.message}.`;
                 });
         }
 
@@ -1064,7 +1285,7 @@
                 }
             });
         }
-        </script>
+    </script>
 </body>
 
 </html>
